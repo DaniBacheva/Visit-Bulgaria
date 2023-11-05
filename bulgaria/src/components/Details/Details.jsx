@@ -26,15 +26,12 @@ export default function Details() {
           </div>
         </div>
 
-
-
         {/*} <!--Edit and Delete are only for creator--> */}
         <div id="action-buttons">
           <a href="" id="edit-btn">Edit</a>
           <a href="" id="delete-btn">Delete</a>
          {/*} <!- Only for logged-in users ( not authors )-->*/}
           <a href="" id="like-btn">Like</a>
-
 
 
         </div>
