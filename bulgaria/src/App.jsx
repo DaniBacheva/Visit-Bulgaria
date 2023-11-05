@@ -14,14 +14,14 @@ import Login from "./components/Login/Login"
 import Register from "./components/Register/Register"
 
 function App() {
-  const [place, setPlace] = useState([]);
+  const [places, setPlace] = useState([]);
 
   useEffect(() => {
   placeService.getAll()
   .then (result => {
     setPlace(result);
   })
-  }, [])
+  }, []);
 
   return (
     <>
@@ -33,7 +33,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
-            <Route path='/dashboard' element={<Dashboard />} />
+            <Route path='/dashboard' element={<Dashboard places={places}/>} />
             <Route path='/new-place' element={<NewPlace />} />
 
           </Routes>
