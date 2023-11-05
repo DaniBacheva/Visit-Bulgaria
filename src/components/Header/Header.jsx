@@ -13,9 +13,12 @@ export default function Header (){
           </div>
          
           <div className="user">
-            <a href="#">ADD PLACE</a>
+            <a href="#">NEW PLACE</a>
+            <a href="#">TOP RATED</a>
             <a href="#">PROFILE</a>  
+            
             <a href="#">LOGOUT</a>
+
           </div>
          
           <div className="guest">

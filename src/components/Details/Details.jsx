@@ -32,6 +32,8 @@ export default function Details() {
         <div id="action-buttons">
           <a href="" id="edit-btn">Edit</a>
           <a href="" id="delete-btn">Delete</a>
+         {/*} <!- Only for logged-in users ( not authors )-->*/}
+          <a href="" id="like-btn">Like</a>
 
 
 
