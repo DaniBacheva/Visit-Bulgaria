@@ -1,0 +1,112 @@
+ @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+body {
+
+  background-image: url("https://thumbs.dreamstime.com/b/part-european-countries-maps-collection-bulgaria-map-hand-drawn-illustration-122684805.jpg");
+  /* background-repeat: no-repeat; */
+  background-size: 100vw;
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  width: 97vw;
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+header {
+  background-color: #cbe5f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0em 0em;
+  width: 97vw;
+}
+
+nav {
+ 
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+
+#logo-img {
+  height: 80px;
+ 
+}
+
+nav a {
+  font-size: 1.5rem;
+  color: rgb(78, 223, 129);
+  font-weight: 400;  
+  text-shadow: 1px 1px rgb(243, 141, 141);
+}
+
+header a {
+  padding: 0 10px;
+  text-decoration: none;
+  
+  
+}
+nav a:hover {
+  color: rgb(8, 8, 7);
+  text-decoration: underline;
+
+  
+}
+
+
+footer {
+  background-color: #e0ecf1;
+  color:  rgb(29, 230, 42);
+  font-weight: bolder;
+  text-align: center;
+  font-weight: 100;
+  letter-spacing: 5px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+}
+
+
+footer p {
+  margin-top:0px;
+}
+
+
+#home h1 {
+  margin-top: 50px;
+  font-style: italic;
+  font-size: 40px;
+  padding: 0px 150px;
+  font-weight: 700;
+  text-shadow: 1px 1px rgb(238, 193, 193);
+  text-align: center;
+  color: rgb(87, 245, 51);
+   border-radius: 10px;
+}
+
+#home h3 {
+  margin-top: 20px;
+  font-style: italic;
+  font-size: 20px;
+  padding: 0px 150px;
+  font-weight: 700;
+  text-shadow: 1px 1px rgb(238, 193, 193);
+  text-align: center;
+  color: rgb(100, 106, 98);
+  border-radius: 10px;
+}
+
+
+#home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#home img {
+  width: 400px;
+  height: 250px;
+}
