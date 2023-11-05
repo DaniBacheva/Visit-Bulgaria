@@ -1,4 +1,7 @@
+import {useParams} from 'react-router-dom'
+
 export default function Details() {
+  const {placeId} = useParams()
   return (
     <section id="details">
       <div id="details-wrapper">

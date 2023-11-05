@@ -1,5 +1,5 @@
 import { useState, useEffect} from 'react'
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import * as placeService from './services/placeService'
 
@@ -14,6 +14,7 @@ import Login from "./components/Login/Login"
 import Register from "./components/Register/Register"
 
 function App() {
+  const navigate = useNavigate();
   const [places, setPlace] = useState([]);
 
   useEffect(() => {
@@ -22,6 +23,14 @@ function App() {
     setPlace(result);
   })
   }, []);
+
+  const onAddPlaceSubmit = async (data) =>{
+
+    const newPlace = await placeService.create(data);
+   setPlace(state=> [...state, newPlace])
+   navigate('/dashboard')
+  }
+
 
   return (
     <>
@@ -34,7 +43,8 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/dashboard' element={<Dashboard places={places}/>} />
-            <Route path='/new-place' element={<NewPlace />} />
+            <Route path='/new-place' element={<NewPlace onAddPlaceSubmit={onAddPlaceSubmit}/>} />
+            <Route path='/dashboard/:placeId' element={<Details />} />
 
           </Routes>
 

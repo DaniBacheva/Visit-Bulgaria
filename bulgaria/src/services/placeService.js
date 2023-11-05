@@ -12,3 +12,9 @@ export const getAll= async ( ) => {
 }
 
 
+export const create =async (placeData) => {
+  const result = await request.post(baseUrl, placeData);
+
+  console.log(result);
+  return result;
+}
