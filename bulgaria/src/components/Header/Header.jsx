@@ -5,16 +5,18 @@ export default function Header (){
         <header>
         
         <Link id="logo" to="/"
-          ><img id="logo-img" src="./images/bg-logo.png" alt="bg-logo"
+          ><img id="logo-img" src="../images/bg-logo.png" alt="bg-logo"
         /></Link>
         <nav>
           <div>
+            <span>Hi, USer</span>
           <Link to="/">HOME</Link>
             <Link to="/dashboard">DASHBOARD</Link>
 
           </div>
          
           <div className="user">
+            
             <Link to="/new-place">NEW PLACE</Link>
             <Link to="/top-rated">TOP RATED</Link>
             <Link to="/profile">PROFILE</Link>  
