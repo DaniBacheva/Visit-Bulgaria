@@ -18,12 +18,12 @@ export default function Register () {
             />
             <input
               type="password"
-              name="re-password"
-              id="repeat-password"
+              name="rePassword"
+              id="repeatPassword"
               placeholder="repeat password"
             />
             <button type="submit">register</button>
-            <p className="message">Already registered? <a href="#">Login</a></p>
+            <p className="message">Already registered? <a href="/login">Login</a></p>
           </form>
         </div>
       </section>

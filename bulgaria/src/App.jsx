@@ -2,6 +2,7 @@ import { useState, useEffect} from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import * as placeService from './services/placeService'
+import { AuthContext } from './contexts/AuthContext';
 
 import NewPlace from "./components/NewPlace/NewPlace"
 import Dashboard from "./components/Dashboard/Dashboard"
@@ -16,6 +17,7 @@ import Register from "./components/Register/Register"
 function App() {
   const navigate = useNavigate();
   const [places, setPlace] = useState([]);
+  const [auth,setAuth] = useState({});
 
   useEffect(() => {
   placeService.getAll()
@@ -31,16 +33,22 @@ function App() {
    navigate('/dashboard')
   }
 
+  const onLoginSubmit = async (e)=>   {
+  e.preventDefault();
+  console.log(Object.fromEntries(new FormData(e.target)))
+  };
+
 
   return (
-    <>
+    <AuthContext.Provider value={{onLoginSubmit}}>
+   
       <div id="wrapper">
         <Header />
 
         <main>
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
+            <Route path='/login' element={<Login onLoginSubmit={onAddPlaceSubmit} />} />
             <Route path='/register' element={<Register />} />
             <Route path='/dashboard' element={<Dashboard places={places}/>} />
             <Route path='/new-place' element={<NewPlace onAddPlaceSubmit={onAddPlaceSubmit}/>} />
@@ -52,7 +60,7 @@ function App() {
 
       </div>
       <Footer />
-    </>
+   </AuthContext.Provider> 
   )
 }
 

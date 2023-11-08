@@ -16,6 +16,7 @@ export default function Details() {
 
 
   return (
+    <>
     <section id="details">
       <div id="details-wrapper">
         <div className="basic">
@@ -46,5 +47,9 @@ export default function Details() {
         </div>
       </div>
     </section>
+    <aside>
+<p>hi</p>
+    </aside>
+    </>
   )
 }
