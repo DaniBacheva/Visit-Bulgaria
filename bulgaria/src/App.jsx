@@ -33,9 +33,9 @@ function App() {
    navigate('/dashboard')
   }
 
-  const onLoginSubmit = async (e)=>   {
-  e.preventDefault();
-  console.log(Object.fromEntries(new FormData(e.target)))
+  const onLoginSubmit = async (data)=>   {
+ 
+  console.log(data)
   };
 
 
@@ -48,7 +48,7 @@ function App() {
         <main>
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login onLoginSubmit={onAddPlaceSubmit} />} />
+            <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/dashboard' element={<Dashboard places={places}/>} />
             <Route path='/new-place' element={<NewPlace onAddPlaceSubmit={onAddPlaceSubmit}/>} />
