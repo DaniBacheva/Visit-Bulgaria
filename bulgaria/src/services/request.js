@@ -12,15 +12,24 @@ export const request = async (method, url, data) => {
         }
     }
     const response = await fetch(url, options);
-    try {
-        const result = await response.json();
-        return result;
-    }
-    catch (error) {
-        return {};
-    }
 
+    if (!response.ok) {
+        const result = await response.json();
+        throw result;
+    }
+    try {
+       const result = await response.json();
+    return result; 
+    }
+    catch(error){
+        //no content case
+        return {}
+    }
+    
 };
+   
+
+
 
 
 export const get = request.bind(null, "GET");

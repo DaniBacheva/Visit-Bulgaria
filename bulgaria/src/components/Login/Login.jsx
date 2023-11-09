@@ -18,7 +18,7 @@ export default function Login() {
     <section id="login">
       <div className="form">
         <h2>Login</h2>
-        <form className="login-form" onSubmit={onSubmit}>
+        <form className="login-form" method="POST" onSubmit={onSubmit}>
           <input
             type="text"
             name="email"

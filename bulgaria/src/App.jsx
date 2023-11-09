@@ -1,6 +1,7 @@
-import { useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
+import * as authService from './services/authService'
 import * as placeService from './services/placeService'
 import { AuthContext } from './contexts/AuthContext';
 
@@ -17,31 +18,37 @@ import Register from "./components/Register/Register"
 function App() {
   const navigate = useNavigate();
   const [places, setPlace] = useState([]);
-  const [auth,setAuth] = useState({});
+  const [auth, setAuth] = useState({});
 
   useEffect(() => {
-  placeService.getAll()
-  .then (result => {
-    setPlace(result);
-  })
+    placeService.getAll()
+      .then(result => {
+        setPlace(result);
+      })
   }, []);
 
-  const onAddPlaceSubmit = async (data) =>{
+  const onAddPlaceSubmit = async (data) => {
 
     const newPlace = await placeService.create(data);
-   setPlace(state=> [...state, newPlace])
-   navigate('/dashboard')
+    setPlace(state => [...state, newPlace])
+    navigate('/dashboard')
   }
 
-  const onLoginSubmit = async (data)=>   {
- 
-  console.log(data)
+  const onLoginSubmit = async (data) => {
+    try {
+      const result = await authService.login(data);
+      setAuth(result);
+
+      navigate('/');
+    } catch (error) {
+      console.log("Try again")
+    }
   };
 
 
   return (
-    <AuthContext.Provider value={{onLoginSubmit}}>
-   
+    <AuthContext.Provider value={{ onLoginSubmit }}>
+
       <div id="wrapper">
         <Header />
 
@@ -50,17 +57,17 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
-            <Route path='/dashboard' element={<Dashboard places={places}/>} />
-            <Route path='/new-place' element={<NewPlace onAddPlaceSubmit={onAddPlaceSubmit}/>} />
+            <Route path='/dashboard' element={<Dashboard places={places} />} />
+            <Route path='/new-place' element={<NewPlace onAddPlaceSubmit={onAddPlaceSubmit} />} />
             <Route path='/dashboard/:placeId' element={<Details />} />
 
           </Routes>
 
-         </main>
+        </main>
 
       </div>
       <Footer />
-   </AuthContext.Provider> 
+    </AuthContext.Provider>
   )
 }
 
