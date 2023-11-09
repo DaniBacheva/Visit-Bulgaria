@@ -1,3 +1,9 @@
+import { useContext } from 'react';
+
+
+import { AuthContext } from "../../contexts/AuthContext";
+import { useForm } from "../../hooks/useForm"
+
 export default function Register () {
     return (
         <section id="register">

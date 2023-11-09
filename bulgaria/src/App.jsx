@@ -45,9 +45,16 @@ function App() {
     }
   };
 
+const context = {
+  onLoginSubmit,
+  userId:auth._id,
+  token:auth.accessToken,
+  userEmail:auth.email,
+  isAuthenticated: !!auth.accessToken
+}
 
   return (
-    <AuthContext.Provider value={{ onLoginSubmit }}>
+    <AuthContext.Provider value={ context }>
 
       <div id="wrapper">
         <Header />
