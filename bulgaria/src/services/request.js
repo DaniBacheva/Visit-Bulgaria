@@ -17,17 +17,15 @@ export const request = async (method, url, data) => {
         const result = await response.json();
         throw result;
     }
-    try {
-       const result = await response.json();
-    return result; 
-    }
-    catch(error){
-        //no content case
+
+    if (response.status === 204) {
         return {}
     }
-    
+    const result = await response.json();
+    return result;
+
 };
-   
+
 
 
 
