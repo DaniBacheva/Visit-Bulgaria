@@ -1,4 +1,4 @@
-
+import {Link} from 'react-router-dom'
 import { useContext } from 'react';
 
 import { AuthContext } from "../../contexts/AuthContext";
@@ -36,7 +36,7 @@ export default function Login() {
           />
           <button type="submit">login</button>
           <p className="message">
-            Not registered? <a href="/register">Create an account</a>
+            Not registered? <Link to="/register">Create an account</Link>
           </p>
         </form>
       </div>

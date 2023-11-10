@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { AuthContext } from '../../contexts/AuthContext'
 
 export default function Header() {
-  const { isAuthenticated , userEmail} = useContext(AuthContext)
+  const { isAuthenticated, userEmail } = useContext(AuthContext)
   return (
     <header>
 
@@ -13,14 +13,14 @@ export default function Header() {
         /></Link>
       <nav>
         <div>
-         
-          <Link to="/">HOME</Link>
+          {isAuthenticated && (
+            <span>Hi, {userEmail}</span>)}
+
           <Link to="/dashboard">DASHBOARD</Link>
 
         </div>
         {isAuthenticated && (
           <div className="user">
-             <span>Hi, {userEmail}</span>
             <Link to="/new-place">NEW PLACE</Link>
             <Link to="/top-rated">TOP RATED</Link>
             <Link to="/profile">PROFILE</Link>

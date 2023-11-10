@@ -14,6 +14,7 @@ import Header from "./components/Header/Header"
 import Home from "./components/Home/Home"
 import Login from "./components/Login/Login"
 import Register from "./components/Register/Register"
+import Logout from './components/Logout/Logout';
 
 function App() {
   const navigate = useNavigate();
@@ -45,16 +46,40 @@ function App() {
     }
   };
 
-const context = {
-  onLoginSubmit,
-  userId:auth._id,
-  token:auth.accessToken,
-  userEmail:auth.email,
-  isAuthenticated: !!auth.accessToken
-}
+  const onRegisterSubmit = async (values) => {
+    const { rePassword, ...registerData } = values;
+    if (rePassword !== registerData.password) {
+      return
+    }
+
+    try {
+      const result = await authService.register(registerData);
+      setAuth(result);
+
+      navigate('/');
+    } catch (error) {
+      console.log("Try again")
+    }
+  };
+
+  const onLogout = async () => {
+    // await authService.logout();
+
+    setAuth({});
+  }
+
+  const context = {
+    onLoginSubmit,
+    onRegisterSubmit,
+    onLogout,
+    userId: auth._id,
+    token: auth.accessToken,
+    userEmail: auth.email,
+    isAuthenticated: !!auth.accessToken
+  }
 
   return (
-    <AuthContext.Provider value={ context }>
+    <AuthContext.Provider value={context}>
 
       <div id="wrapper">
         <Header />
@@ -63,6 +88,7 @@ const context = {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/logout' element={<Logout />} />
             <Route path='/register' element={<Register />} />
             <Route path='/dashboard' element={<Dashboard places={places} />} />
             <Route path='/new-place' element={<NewPlace onAddPlaceSubmit={onAddPlaceSubmit} />} />
