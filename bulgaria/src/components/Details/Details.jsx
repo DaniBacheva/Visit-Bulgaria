@@ -1,9 +1,10 @@
 import {useParams} from 'react-router-dom';
-import * as placeService from '../../services/placeService'
+import {placeServiceFactory} from '../../services/placeService'
 import { useEffect, useState } from 'react';
+import { useService } from '../../hooks/useService';
 
 export default function Details() {
-
+const placeService = useService(placeServiceFactory)
   const {placeId} = useParams();
   const [place, setPlace] = useState({})
 

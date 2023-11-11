@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
-import * as authService from './services/authService'
-import * as placeService from './services/placeService'
+import {authServiceFactory} from './services/authService'
+import {placeServiceFactory}   from './services/placeService'
 import { AuthContext } from './contexts/AuthContext';
+import { useService} from './hooks/useService'
 
 import NewPlace from "./components/NewPlace/NewPlace"
 import Dashboard from "./components/Dashboard/Dashboard"
@@ -20,6 +21,8 @@ function App() {
   const navigate = useNavigate();
   const [places, setPlace] = useState([]);
   const [auth, setAuth] = useState({});
+  const placeService = placeServiceFactory(auth.accessToken)
+  const authService = authServiceFactory(auth.accessToken)
 
   useEffect(() => {
     placeService.getAll()
@@ -29,8 +32,9 @@ function App() {
   }, []);
 
   const onAddPlaceSubmit = async (data) => {
-
+console.log(auth.accessToken)
     const newPlace = await placeService.create(data);
+    console.log(newPlace)
     setPlace(state => [...state, newPlace])
     navigate('/dashboard')
   }
@@ -63,8 +67,7 @@ function App() {
   };
 
   const onLogout = async () => {
-    // await authService.logout();
-
+     await authService.logout();
     setAuth({});
   }
 
