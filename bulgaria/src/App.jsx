@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
-import {authServiceFactory} from './services/authService'
-import {placeServiceFactory}   from './services/placeService'
+import { authServiceFactory } from './services/authService'
+import { placeServiceFactory } from './services/placeService'
 import { AuthContext } from './contexts/AuthContext';
-import { useService} from './hooks/useService'
+
 
 import NewPlace from "./components/NewPlace/NewPlace"
 import Dashboard from "./components/Dashboard/Dashboard"
@@ -32,11 +32,21 @@ function App() {
   }, []);
 
   const onAddPlaceSubmit = async (data) => {
-console.log(auth.accessToken)
+    console.log(auth.accessToken)
     const newPlace = await placeService.create(data);
     console.log(newPlace)
     setPlace(state => [...state, newPlace])
     navigate('/dashboard')
+  }
+
+  const onPlaceEditSubmit = async (data) => {
+    const result = await placeService.edit(data._id, data);
+    console.log(data)
+    //todo change state
+
+    //setPlace(state => state.map(p => p._id === data._id ? result : p))
+
+    navigate(`/dashboard/${data._id}`);
   }
 
   const onLoginSubmit = async (data) => {
@@ -67,7 +77,7 @@ console.log(auth.accessToken)
   };
 
   const onLogout = async () => {
-     await authService.logout();
+    await authService.logout();
     setAuth({});
   }
 
@@ -96,6 +106,7 @@ console.log(auth.accessToken)
             <Route path='/dashboard' element={<Dashboard places={places} />} />
             <Route path='/new-place' element={<NewPlace onAddPlaceSubmit={onAddPlaceSubmit} />} />
             <Route path='/dashboard/:placeId' element={<Details />} />
+            <Route path='/dashboard/:placeId/edit' element={<EditPage onPlaceEditSubmit={onPlaceEditSubmit} />} />
 
           </Routes>
 

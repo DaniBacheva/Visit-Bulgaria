@@ -28,10 +28,16 @@ export const placeServiceFactory = (token) => {
     return result;
   };
 
+  const edit = (placeId, data) => request.put(`${baseUrl}/${placeId}`, data)
+
+  const deletePlace = (placeId)=> request.del(`${baseUrl}/${placeId}`)
+
 return {
   getAll, 
   getOne, 
-  create
+  create,
+  edit,
+  deletePlace
 }
 
 }
