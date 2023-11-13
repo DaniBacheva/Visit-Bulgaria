@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
-import { authServiceFactory } from './services/authService'
+//import { authServiceFactory } from './services/authService'
 import { placeServiceFactory } from './services/placeService'
-import { AuthContext } from './contexts/AuthContext';
+import { AuthProvider } from './contexts/AuthContext';
 
 
 import NewPlace from "./components/NewPlace/NewPlace"
@@ -20,9 +20,8 @@ import Logout from './components/Logout/Logout';
 function App() {
   const navigate = useNavigate();
   const [places, setPlace] = useState([]);
-  const [auth, setAuth] = useState({});
-  const placeService = placeServiceFactory(auth.accessToken)
-  const authService = authServiceFactory(auth.accessToken)
+  const placeService = placeServiceFactory();//auth.accessToken
+
 
   useEffect(() => {
     placeService.getAll()
@@ -32,7 +31,7 @@ function App() {
   }, []);
 
   const onAddPlaceSubmit = async (data) => {
-    console.log(auth.accessToken)
+    //console.log(auth.accessToken)
     const newPlace = await placeService.create(data);
     console.log(newPlace)
     setPlace(state => [...state, newPlace])
@@ -44,55 +43,14 @@ function App() {
     console.log(data)
     //todo change state
 
-    //setPlace(state => state.map(p => p._id === data._id ? result : p))
+    setPlace(state => state.map(p => p._id === data._id ? result : p))
 
     navigate(`/dashboard/${data._id}`);
   }
 
-  const onLoginSubmit = async (data) => {
-    try {
-      const result = await authService.login(data);
-      setAuth(result);
-
-      navigate('/');
-    } catch (error) {
-      console.log("Try again")
-    }
-  };
-
-  const onRegisterSubmit = async (values) => {
-    const { rePassword, ...registerData } = values;
-    if (rePassword !== registerData.password) {
-      return
-    }
-
-    try {
-      const result = await authService.register(registerData);
-      setAuth(result);
-
-      navigate('/');
-    } catch (error) {
-      console.log("Try again")
-    }
-  };
-
-  const onLogout = async () => {
-    await authService.logout();
-    setAuth({});
-  }
-
-  const context = {
-    onLoginSubmit,
-    onRegisterSubmit,
-    onLogout,
-    userId: auth._id,
-    token: auth.accessToken,
-    userEmail: auth.email,
-    isAuthenticated: !!auth.accessToken
-  }
 
   return (
-    <AuthContext.Provider value={context}>
+    <AuthProvider>
 
       <div id="wrapper">
         <Header />
@@ -114,7 +72,7 @@ function App() {
 
       </div>
       <Footer />
-    </AuthContext.Provider>
+    </AuthProvider>
   )
 }
 
