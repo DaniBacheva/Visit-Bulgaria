@@ -1,28 +1,40 @@
 #details-wrapper {
   background-color: rgb(242, 236, 236);
-  margin: 10px auto;
-  height: 70%;
-  width: 80%;
- border-radius: 5px;
+  margin: 15px;
+  height: 80%;
+  width: 55%;
+  border-radius: 5px;
+  float: left;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.24);
-  
+
 }
 
+#comments {
+  background-color: rgb(242, 236, 236);
+  margin: 15px;
+  height: 80%;
+  width: 40%;
+  border-radius: 5px;
+  float: right;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.24);
+
+}
 
 #details-wrapper img {
   display: block;
-  margin-top:   auto;
+  margin: 10 px;
   height: 30vh;
   width: 60vh;
 }
-#details-img{
-  padding-top: 10px;
+
+#details-img {
+  padding: 20px;
 }
 
 
 #details-location {
   text-align: center;
-    font-size: 18px;
+  font-size: 18px;
 }
 
 #details-description {
@@ -31,6 +43,7 @@
   height: auto;
   text-align: center;
 }
+
 #details-name {
   font-size: 20px;
   text-align: center;
@@ -53,7 +66,24 @@ span {
   display: flex;
   justify-content: center;
   margin-bottom: 5px;
-  
+
+}
+
+#delete-btn {
+  text-decoration: none;
+  margin: auto 50px;
+  margin-bottom: 10px;
+  font-size: 21px;
+  width: 130px;
+  text-align: center;
+  color: white;
+  background: rgb(156, 244, 144);
+  text-shadow: 1px 1px black;
+  border-radius: 5px;
+  border:none
+}
+#delete-btn:hover {
+  background: #116508;
 }
 
 #action-buttons a {
@@ -68,11 +98,12 @@ span {
   text-shadow: 1px 1px black;
   border-radius: 5px;
 }
+
 #action-buttons a:hover {
   background: #116508;
 }
 
-#details h3{
+#details h3 {
   text-align: center;
   letter-spacing: 6px;
-  }
+}

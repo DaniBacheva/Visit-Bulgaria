@@ -3,24 +3,50 @@ import { useNavigate, Link, useParams } from 'react-router-dom'
 
 import { placeServiceFactory } from '../../services/placeService'
 import { useService } from '../../hooks/useService';
-import { AuthContext } from '../../contexts/AuthContext';
+import { useAuthContext } from '../../contexts/AuthContext';
 import { usePlaceContext } from '../../contexts/PlaceContext';
+import * as commentService from '../../services/commentService'
+
+import AddComment from './AddComment/AddComments';
 
 export default function Details() {
-  const { userId } = useContext(AuthContext)
-  const placeService = useService(placeServiceFactory)
+  const { userId, isAuthenticated, userEmail } = useAuthContext();
+  const placeService = useService(placeServiceFactory);
   const { placeId } = useParams();
-  const [place, setPlace] = useState({})
-  const { deletePlace} = usePlaceContext()
-  const navigate = useNavigate()
+  const [place, setPlace] = useState({});
+  const { deletePlace } = usePlaceContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    placeService.getOne(placeId)
-      .then(result => {
-        setPlace(result)
-      })
+    Promise.all([
+      placeService.getOne(placeId),
+      commentService.getAll(placeId),
+    ])
+      .then(([placeData, comments]) => {
+        setPlace({
+          ...placeData,
+          comments,
+        });
+      });
   }, [placeId]);
 
+  const onCommentSubmit = async (values) => {
+    const response = await commentService.create(placeId, values.comment);
+    console.log(response);
+
+    setPlace(state => ({
+      ...state,
+      comments: [...state.comments,
+      {
+        ...response,
+        author: {
+          email: userEmail
+        }
+      }
+      ]
+    }))
+
+  }
   const isOwner = place._ownerId === userId;
   //console.log(userId);
   //console.log(place._ownerId)
@@ -31,11 +57,11 @@ export default function Details() {
 
     if (result) {
       await placeService.deletePlace(place._id);
-    
-    deletePlace(place._id)
 
-    navigate('/dashboard');
-}
+      deletePlace(place._id)
+
+      navigate('/dashboard');
+    }
 
   }
   return (
@@ -60,20 +86,42 @@ export default function Details() {
           </div>
 
           {/*} <!--Edit and Delete are only for creator--> */}
-          {isOwner && (
-            <div id="action-buttons">
+
+          <div id="action-buttons">
+            {isOwner && ( 
+              <>
               <Link to={`/dashboard/${place._id}/edit`} id="edit-btn">Edit</Link>
               <button onClick={onDeleteClick} id="delete-btn">Delete</button>
-            </div>
-          )}
+              </>
+            )}
+            {/*} <!- Only for logged-in users ( not authors )-->*/}
+            <Link to="" id="like-btn">Like</Link>
 
-          {/*} <!- Only for logged-in users ( not authors )-->*/}
-          <a href="" id="like-btn">Like</a>
-
-
+          </div>
 
         </div>
+
+        <aside>
+          <div id="comments">
+            <h3>Comments:</h3>
+            <ul>
+              {place.comments && place.comments.map(c => (
+                <li key={c._id} >
+                  <p>{c.author.email}:{c.comment}</p>
+                </li>
+              ))}
+            </ul>
+            {!place.comments?.length && (
+              <p>No comments yet</p>
+            )}
+
+            {isAuthenticated && <AddComment onCommentSubmit={onCommentSubmit} />}
+
+          </div>
+        </aside>
       </section>
+
+
     </>
   )
 }
