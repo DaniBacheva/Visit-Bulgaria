@@ -1,12 +1,17 @@
-import { useContext } from "react"
-import { AuthContext } from "../../contexts/AuthContext" 
+import { Navigate } from "react-router-dom"
+import { useAuthContext } from "../../contexts/AuthContext" 
 
 export default function RouteGuard ({
-    children
+    children,
 })  {
 
-    const { isAuthenticated} = useContext(AuthContext)
-    console.log('guard')
+    const { isAuthenticated} = useAuthContext()
+
+    if(!isAuthenticated) {
+
+        return  <Navigate to='/login' />
+    }
+   
     return (
         <>
             {children}

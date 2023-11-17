@@ -1,11 +1,8 @@
-import {useState} from 'react'
-
+import { usePlaceContext } from "../../contexts/PlaceContext"
 import { useForm } from "../../hooks/useForm"
 
-export default function NewPlace({
-  onAddPlaceSubmit
-}) {
-
+export default function NewPlace() {
+  const { onAddPlaceSubmit} = usePlaceContext()
   const {values, changeHandler, onSubmit}  = useForm({
     name: '',
     location:'',

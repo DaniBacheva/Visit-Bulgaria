@@ -5,7 +5,6 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { useForm } from "../../hooks/useForm"
 
 export default function Register () {
-
   const { onRegisterSubmit } = useContext(AuthContext);
 
   const { values, changeHandler, onSubmit } = useForm({

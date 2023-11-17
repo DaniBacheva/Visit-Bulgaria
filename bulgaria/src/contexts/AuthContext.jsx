@@ -2,7 +2,6 @@ import { createContext, useContext } from 'react';
 import { useNavigate } from 'react-router-dom'
 
 import { authServiceFactory } from '../services/authService';
-
 import { useLocalStorage } from '../hooks/useLocalStarage';
 
 export const AuthContext = createContext(); // context
@@ -20,7 +19,6 @@ export const AuthProvider = ({  //komponent
         if (rePassword !== registerData.password) {
             return
         }
-
         try {
             const result = await authService.register(registerData);
             setAuth(result);
