@@ -1,12 +1,13 @@
-import { createContext } from 'react';
-import { useState } from 'react'
-import { authServiceFactory } from '../services/authService';
+import { createContext, useContext } from 'react';
 import { useNavigate } from 'react-router-dom'
+
+import { authServiceFactory } from '../services/authService';
+
 import { useLocalStorage } from '../hooks/useLocalStarage';
 
-export const AuthContext = createContext();
+export const AuthContext = createContext(); // context
 
-export const AuthProvider = ({
+export const AuthProvider = ({  //komponent
     children,
 }) => {
     const [auth, setAuth] = useLocalStorage('auth', {});
@@ -60,10 +61,12 @@ export const AuthProvider = ({
         <>
             <AuthContext.Provider value={contextValues}>
                 {children}
-
             </AuthContext.Provider>
-
-
         </>
     )
+}
+export const useAuthContext = () => {  // za da ne import useContext i samiq context
+    const context = useContext(AuthContext);
+
+    return context;
 }

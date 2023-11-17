@@ -21,8 +21,8 @@ const placeService = useService(placeServiceFactory)
   },[placeId]);
 
   const isOwner = place._ownerId===userId;
-console.log(userId);
-console.log(place._ownerId)
+//console.log(userId);
+//console.log(place._ownerId)
 
 const onDeleteClick = async()=> {
 await placeService.deletePlace(place._id);

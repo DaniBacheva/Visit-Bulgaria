@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 export const useLocalStorage =(key, initialValue) => {
 
-      const [state, setState] = useState(()=> {
+      const [state, setState] = useState(()=> { // sinhronno da iz4islim steta - 6te proweri za auth
         const persistedStateJSON = localStorage.getItem(key);
         if (persistedStateJSON){
             const persistedState = JSON.parse(persistedStateJSON);
@@ -10,12 +10,14 @@ export const useLocalStorage =(key, initialValue) => {
             return persistedState;
         }
 
-        return initialValue
+        return initialValue;
       });
 
       const setLocalStorageState =(value)=> {
         setState(value);
+
 //check if value is a function - set the result- not to break JSON stringify
+
         localStorage.setItem(key, JSON.stringify(value))
       };
 

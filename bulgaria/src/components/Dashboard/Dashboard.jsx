@@ -1,9 +1,11 @@
+import { usePlaceContext } from "../../contexts/PlaceContext";
+
 import Place from "./Place/Place";
 
 
-export default function Dashboard({
-    places
-}) {
+export default function Dashboard(){
+    const { places} = usePlaceContext();
+
     return (
         <section id="dashboard">
 

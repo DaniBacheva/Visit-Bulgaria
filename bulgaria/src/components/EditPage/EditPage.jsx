@@ -9,7 +9,7 @@ export default function EditPage ({
   onPlaceEditSubmit,
 }) {
 const {placeId} = useParams();
-console.log(placeId)
+//console.log(placeId)
 const placeService =  useService(placeServiceFactory);
 const {values, changeHandler, onSubmit, changeValues}  = useForm({
 

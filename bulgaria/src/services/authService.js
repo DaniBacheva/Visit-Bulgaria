@@ -1,6 +1,6 @@
 import { requestFactory } from './request';
 
-const baseUrl = 'http://localhost:3030/users';
+const baseUrl = 'http://localhost:3030/users';// kawi4kite
 
 export const authServiceFactory = (token) => {
     const request= requestFactory(token);
@@ -10,6 +10,6 @@ export const authServiceFactory = (token) => {
 
         register: (registerData) => request.post(`${baseUrl}/register`, registerData),
 
-        logout: (token) => request.get(`${baseUrl}/logout`)
+        logout: () => request.get(`${baseUrl}/logout`)
     }
 }

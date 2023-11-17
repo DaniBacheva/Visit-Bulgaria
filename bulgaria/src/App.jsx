@@ -1,10 +1,7 @@
-import { useState, useEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
-//import { authServiceFactory } from './services/authService'
-import { placeServiceFactory } from './services/placeService'
+import { PlaceProvider } from './contexts/PlaceContext';
 import { AuthProvider } from './contexts/AuthContext';
-
 
 import NewPlace from "./components/NewPlace/NewPlace"
 import Dashboard from "./components/Dashboard/Dashboard"
@@ -16,64 +13,40 @@ import Home from "./components/Home/Home"
 import Login from "./components/Login/Login"
 import Register from "./components/Register/Register"
 import Logout from './components/Logout/Logout';
+//import RouteGuard from './components/common/RouteGuard';
 
 function App() {
-  const navigate = useNavigate();
-  const [places, setPlace] = useState([]);
-  const placeService = placeServiceFactory();//auth.accessToken
 
+    return (
+        <AuthProvider>
+<PlaceProvider>
+            <div id="wrapper">
+                <Header />
 
-  useEffect(() => {
-    placeService.getAll()
-      .then(result => {
-        setPlace(result);
-      })
-  }, []);
+                <main>
+                    <Routes>
+                        <Route path='/' element={<Home />} />
+                        <Route path='/login' element={<Login />} />
+                        <Route path='/logout' element={<Logout />} />
+                        <Route path='/register' element={<Register />} />
+                        <Route path='/dashboard' element={<Dashboard />} />
+                      <Route path='/new-place' element={
+                          //  <RouteGuard>
+                            <NewPlace/>
+                       // </RouteGuard>
+                      }/>
+                        <Route path='/dashboard/:placeId' element={<Details />} />
+                        <Route path='/dashboard/:placeId/edit' element={<EditPage />} />
 
-  const onAddPlaceSubmit = async (data) => {
-    //console.log(auth.accessToken)
-    const newPlace = await placeService.create(data);
-    console.log(newPlace)
-    setPlace(state => [...state, newPlace])
-    navigate('/dashboard')
-  }
+                    </Routes>
 
-  const onPlaceEditSubmit = async (data) => {
-    const result = await placeService.edit(data._id, data);
-    console.log(data)
-    //todo change state
+                </main>
 
-    setPlace(state => state.map(p => p._id === data._id ? result : p))
-
-    navigate(`/dashboard/${data._id}`);
-  }
-
-
-  return (
-    <AuthProvider>
-
-      <div id="wrapper">
-        <Header />
-
-        <main>
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/logout' element={<Logout />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/dashboard' element={<Dashboard places={places} />} />
-            <Route path='/new-place' element={<NewPlace onAddPlaceSubmit={onAddPlaceSubmit} />} />
-            <Route path='/dashboard/:placeId' element={<Details />} />
-            <Route path='/dashboard/:placeId/edit' element={<EditPage onPlaceEditSubmit={onPlaceEditSubmit} />} />
-
-          </Routes>
-
-        </main>
-
-      </div>
-      <Footer />
-    </AuthProvider>
-  )
+            </div>
+            <Footer />
+            </PlaceProvider>
+        </AuthProvider>
+    )
 }
 
 export default App
