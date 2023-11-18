@@ -53,7 +53,7 @@ const contextValues = {
     onPlaceEditSubmit, 
     deletePlace, 
     getPlace,
-};
+  };
 
 return (
     <PlaceContext.Provider value={contextValues}>

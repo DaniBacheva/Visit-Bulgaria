@@ -1,6 +1,6 @@
 import { usePlaceContext } from "../../contexts/PlaceContext";
 
-import Place from "./Place/Place";
+import Place from "../Place/Place";
 
 
 export default function Dashboard() {

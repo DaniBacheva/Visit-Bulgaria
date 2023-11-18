@@ -5,7 +5,7 @@ import { placeServiceFactory } from '../../services/placeService'
 import { useService } from '../../hooks/useService';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { usePlaceContext } from '../../contexts/PlaceContext';
-import * as commentService from '../../services/commentService'
+import * as commentService from '../../services/commentService';
 
 import AddComment from './AddComment/AddComments';
 
@@ -52,7 +52,6 @@ export default function Details() {
   //console.log(place._ownerId)
 
   const onDeleteClick = async () => {
-
     const result = confirm(`Are you sure you want to delete ${place.name}?`);
 
     if (result) {
@@ -85,20 +84,14 @@ export default function Details() {
             </div>
           </div>
 
-          {/*} <!--Edit and Delete are only for creator--> */}
-
           <div id="action-buttons">
-            {isOwner && ( 
+            {isOwner && (
               <>
-              <Link to={`/dashboard/${place._id}/edit`} id="edit-btn">Edit</Link>
-              <button onClick={onDeleteClick} id="delete-btn">Delete</button>
+                <Link to={`/dashboard/${place._id}/edit`} id="edit-btn">Edit</Link>
+                <button onClick={onDeleteClick} id="delete-btn">Delete</button>
               </>
             )}
-            {/*} <!- Only for logged-in users ( not authors )-->*/}
-            <Link to="" id="like-btn">Like</Link>
-
           </div>
-
         </div>
 
         <aside>
@@ -120,8 +113,6 @@ export default function Details() {
           </div>
         </aside>
       </section>
-
-
     </>
   )
 }

@@ -23,7 +23,6 @@ export default function Header() {
         {isAuthenticated && (
           <div className="user">
             <Link to="/new-place">NEW PLACE</Link>
-            <Link to="/top-rated">TOP RATED</Link>
             <Link to="/profile">PROFILE</Link>
             <Link to="/logout">LOGOUT</Link>
           </div>

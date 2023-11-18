@@ -1,4 +1,5 @@
 import { Route, Routes, useNavigate } from 'react-router-dom';
+//import RouteGuard from './components/common/RouteGuard';
 
 import { PlaceProvider } from './contexts/PlaceContext';
 import { AuthProvider } from './contexts/AuthContext';
@@ -13,37 +14,39 @@ import Home from "./components/Home/Home"
 import Login from "./components/Login/Login"
 import Register from "./components/Register/Register"
 import Logout from './components/Logout/Logout';
-//import RouteGuard from './components/common/RouteGuard';
+import Profile from './components/Profile/Profile';
+
 
 function App() {
 
     return (
         <AuthProvider>
-<PlaceProvider>
-            <div id="wrapper">
-                <Header />
+            <PlaceProvider>
+                <div id="wrapper">
+                    <Header />
 
-                <main>
-                    <Routes>
-                        <Route path='/' element={<Home />} />
-                        <Route path='/login' element={<Login />} />
-                        <Route path='/logout' element={<Logout />} />
-                        <Route path='/register' element={<Register />} />
-                        <Route path='/dashboard' element={<Dashboard />} />
-                      <Route path='/new-place' element={
-                          //  <RouteGuard>
-                            <NewPlace/>
-                       // </RouteGuard>
-                      }/>
-                        <Route path='/dashboard/:placeId' element={<Details />} />
-                        <Route path='/dashboard/:placeId/edit' element={<EditPage />} />
+                    <main>
+                        <Routes>
+                            <Route path='/' element={<Home />} />
+                            <Route path='/login' element={<Login />} />
+                            <Route path='/logout' element={<Logout />} />
+                            <Route path='/register' element={<Register />} />
+                            <Route path='/dashboard' element={<Dashboard />} />
+                            <Route path='/new-place' element={
+                                //  <RouteGuard>
+                                <NewPlace />
+                                // </RouteGuard>
+                            } />
+                            <Route path='/dashboard/:placeId' element={<Details />} />
+                            <Route path='/dashboard/:placeId/edit' element={<EditPage />} />
+                            <Route path='/profile' element={<Profile />} />
 
-                    </Routes>
+                        </Routes>
 
-                </main>
+                    </main>
 
-            </div>
-            <Footer />
+                </div>
+                <Footer />
             </PlaceProvider>
         </AuthProvider>
     )
