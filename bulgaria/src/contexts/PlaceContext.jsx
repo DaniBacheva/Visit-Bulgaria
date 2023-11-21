@@ -47,12 +47,14 @@ const getPlace=(placeId)=> {
     return places.find(place=> place._id===placeId);
 }
 
+
 const contextValues = {
     places, 
     onAddPlaceSubmit,
     onPlaceEditSubmit, 
     deletePlace, 
     getPlace,
+
   };
 
 return (

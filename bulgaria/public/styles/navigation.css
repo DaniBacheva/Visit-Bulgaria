@@ -1,7 +1,7 @@
- @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-body {
 
-  background-image: url("https://thumbs.dreamstime.com/b/part-european-countries-maps-collection-bulgaria-map-hand-drawn-illustration-122684805.jpg");
+body {
+background-image:url('../images/cover.png') ;
+  /*background-image: url("https://media.istockphoto.com/id/1500678580/vector/highly-detailed-bulgaria-map-with-borders-isolated-on-background.jpg?s=170667a&w=0&k=20&c=booUF6_VUNOzzBzUB4rqG4Qhmkjpwt108pTVOHcrdQ0=");
   /* background-repeat: no-repeat; */
   background-size: 100vw;
   margin: auto;
