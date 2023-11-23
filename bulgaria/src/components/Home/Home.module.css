@@ -1,0 +1,35 @@
+h1 {
+    margin-top: 50px;
+    font-style: italic;
+    font-size: 40px;
+    padding: 0px 150px;
+    font-weight: 700;
+    text-shadow: 1px 1px rgb(238, 193, 193);
+    text-align: center;
+    color: rgb(87, 245, 51);
+    
+  }
+  
+  h3 {
+    margin-top: 20px;
+    font-style: italic;
+    font-size: 20px;
+    padding: 0px 150px;
+    font-weight: 700;
+    text-shadow: 1px 1px rgb(238, 193, 193);
+    text-align: center;
+    color: rgb(100, 106, 98);
+     }
+  
+  
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+.home img {
+    width: 400px;
+    height: 250px;
+  }

@@ -1,0 +1,75 @@
+header {
+    background-color: #dcfa8f;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0em 0em;
+    width: 97vw;
+}
+
+nav {
+
+    display: flex;
+    justify-content: space-between;
+
+}
+
+
+nav a {
+    font-size: 1.5rem;
+    color: rgb(78, 223, 129);
+    font-weight: 400;  
+    text-shadow: 1px 1px rgb(243, 141, 141);
+  }
+  
+  header a {
+    padding: 0 10px;
+    text-decoration: none;
+    
+    
+  }
+  nav a:hover {
+    color: rgb(8, 8, 7);
+    text-decoration: underline;
+   
+  }
+
+.logo {
+    height: 70px;
+
+}
+
+.logoImg {
+    height: 70px;
+   
+  }
+
+.user:hover {
+    color: rgb(8, 8, 7);
+    text-decoration: none;
+
+
+}
+
+.user {
+    font-size: 1.5rem;
+    color: rgb(78, 223, 129);
+    font-weight: 400;
+    text-shadow: 1px 1px rgb(243, 141, 141);
+
+}
+
+.guest:hover {
+    color: rgb(8, 8, 7);
+    text-decoration: none;
+
+
+}
+
+.guest {
+    font-size: 1.5rem;
+    color: rgb(78, 223, 129);
+    font-weight: 400;
+    text-shadow: 1px 1px rgb(243, 141, 141);
+
+}

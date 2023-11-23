@@ -1,4 +1,6 @@
-import {Link }from 'react-router-dom'
+import {Link }from 'react-router-dom';
+
+import * as styles from '../Place/Place.module.css'
 
 export default function Place ({
     name, 
@@ -7,11 +9,11 @@ export default function Place ({
     _id,
 }){
     return (
-        <div className="place">
+        <div className={styles.place}>
         <img src={imageUrl} />
-        <h3 className="name">{name}</h3>
-        <p className="description">{description}</p>
-        <Link className="details-btn" to={`/dashboard/${_id}`}>More Info</Link>
+        <h3>{name}</h3>
+        <p>{description}</p>
+        <Link className={styles.detailsBtn} to={`/dashboard/${_id}`}>More Info</Link>
       </div>
     )
 }

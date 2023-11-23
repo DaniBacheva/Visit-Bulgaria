@@ -56,9 +56,10 @@ const [errors, setErrors] = useState({})
 
   return (
     <section id="login">
-      <div className="form">
+      <div className={styles.form}>
         <h2>Login</h2>
-        <form className="login-form" method="POST" onSubmit={onSubmit}>
+        <form className={styles.loginForm} method="POST" onSubmit={onSubmit}>
+
           <input
             type="text"
             name="email"
@@ -84,7 +85,7 @@ const [errors, setErrors] = useState({})
               <p className={styles.errorMessage}>{errors.password}</p>
             )}
           
-          <button type="submit">login</button>
+          <button type="submit" disabled={Object.values(errors).some(x=>x)}>login</button>
           <p className="message">
             Not registered? <Link to="/register">Create an account</Link>
           </p>

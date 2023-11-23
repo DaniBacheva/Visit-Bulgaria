@@ -1363,7 +1363,42 @@
             }
         },
         comments: {
+            "f84fcd89-cedf-4e98-aaea-f07cbb66fc44": {
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "placeId": "de6342b5-f904-4508-9205-437751e49a97",
+                "comment": "beautiful place",
+                "_createdOn": 1700398299952,
+                "_id": "f84fcd89-cedf-4e98-aaea-f07cbb66fc44"
+            },
         
+        },
+
+        places: {
+            "de6342b5-f904-4508-9205-437751e49a97":
+            {
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "name": "VELIKO TARNOVO",
+                "location": "250 km from Sofia",
+                "imageUrl": "https://cdn.thecrazytourist.com/wp-content/uploads/2023/01/ccimage-shutterstock_528561313.jpg",
+                "description": "The legendary City of the Tsars stands aloft on the edge of the rising foothills of Bulgaria’s northern mountains.",
+                "additionalInfo": "Bisected by the S-shaped meanders of the Yantra River, the town’s setting is nothing short of breathtaking, with terraces of terracotta-coloured roofs looming over the waterways below.\n\nThe pretty cobblestone lanes and half-timbered homes of this one’s old town are prime examples of what’s now known as the Tarnovo school, which developed as the Second Bulgarian Empire boomed in the Middle Ages.\n\nThat means travelers here experience a mixture of natural beauty – courtesy of the wild coniferous woods that blanket the landscapes all around – and unbridled culture and history, oozing from the Tsarevets capitol and the clutch of gorgeous Byzantine churches.",
+                "_createdOn": 1700398210728,
+                "_id": "de6342b5-f904-4508-9205-437751e49a97",
+                "_updatedOn": 1700592499671
+            },
+            "4666613c-0d9a-4b90-97cd-bb0843b412cd":
+            {
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "name": "Krushuna watterfall",
+                "location": "180 km away from Sofia",
+                "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/KrushunaIwatterfall.jpg/420px-KrushunaIwatterfall.jpg",
+                "description": "The Krushùna Falls (Krushùnski Vodopàdi as they are pronounced in Bulgarian) are a karst cascade located near the village of Krushùna, some 34 km from the historical town of Lovech in north-central Bulgaria.",
+                "additionalInfo": "The falls, located in an area known as Maarata, are the biggest travertine cascade in the country, unique with its picturesque scenery, lush vegetation, numerous round-shaped terraces and small natural pools with mineral water.\nThe main waterfall is about 20 m high and it splits into several smaller ones along its way down the soft limestone rocks. There is a path that allows visitors to go up the river and get to the spring of the waterfall hidden in a cave. Along the way there are steps and bridges so that one can get the best views of the cascades, pools and mossy rocks.\nThe water in the area, with a temperature of 58 °C, has been found to have beneficial effects on rheumatism, skin problems and gynecological conditions among others. For centuries local people have believed in the healing power of these waters, and many still go to the falls to do a ritual for good health on Saint George’s Day (nowadays celebrated on May 6).",
+                "_createdOn": 1700588189283,
+                "_id": "4666613c-0d9a-4b90-97cd-bb0843b412cd",
+                "_updatedOn": 1700590767081
+            }
+
         }
     };
     var rules$1 = {

@@ -140,7 +140,7 @@ export default function NewPlace() {
           {errors.additionalInfo && (
             <p className={styles.errorMessage}>{errors.additionalInfo}</p>
           )}
-          <button type="submit">Add Place</button>
+          <button type="submit" disabled={Object.values(errors).some(x=>x)} >Add Place</button>
 
         </form>
       </div>
