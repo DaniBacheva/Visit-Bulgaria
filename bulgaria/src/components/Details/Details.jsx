@@ -8,12 +8,14 @@ import { usePlaceContext } from '../../contexts/PlaceContext';
 import * as commentService from '../../services/commentService';
 
 import AddComment from './AddComment/AddComments';
+import DeletePlace from './DeletePlace/DeletePlace';
 
 export default function Details() {
   const { userId, isAuthenticated, userEmail } = useAuthContext();
   const placeService = useService(placeServiceFactory);
   const { placeId } = useParams();
   const [place, setPlace] = useState({});
+  const [showDelete, setShowDelete] = useState(false)
   const { deletePlace } = usePlaceContext();
   const navigate = useNavigate();
 
@@ -42,29 +44,41 @@ export default function Details() {
         author: {
           email: userEmail
         }
-      }
-      ]
+      }],
     }))
-
   }
   const isOwner = place._ownerId === userId;
   //console.log(userId);
   //console.log(place._ownerId)
 
   const onDeleteClick = async () => {
-    const result = confirm(`Are you sure you want to delete ${place.name}?`);
-
-    if (result) {
-      await placeService.deletePlace(place._id);
-
-      deletePlace(place._id)
-
-      navigate('/dashboard');
-    }
-
+    setShowDelete(true);
   }
+  // const result = confirm(`Are you sure you want to delete ${place.name}?`);
+  //if (result) {
+  //  await placeService.deletePlace(place._id);   delete from server
+  //  deletePlace(place._id)  delete from state
+  //  navigate('/dashboard');
+  // }
+  //}
+
+  const deletePlaceHandler = async () => {
+    console.log("ok")
+    await placeService.deletePlace(place._id);
+    deletePlace(place._id)
+    navigate('/dashboard');
+  }
+
+
   return (
     <>
+      {showDelete && (
+        <DeletePlace
+          onClose={() => setShowDelete(false)}
+          onDelete={deletePlaceHandler}
+
+        />
+      )}
       <section id="details">
         <div id="details-wrapper">
           <div className="basic">
@@ -88,7 +102,8 @@ export default function Details() {
             {isOwner && (
               <>
                 <Link to={`/dashboard/${place._id}/edit`} id="edit-btn">Edit</Link>
-                <button onClick={onDeleteClick} id="delete-btn">Delete</button>
+                <button onClick={onDeleteClick}
+                  id="delete-btn">Delete</button>
               </>
             )}
           </div>
@@ -107,9 +122,7 @@ export default function Details() {
             {!place.comments?.length && (
               <p>No comments yet</p>
             )}
-
             {isAuthenticated && <AddComment onCommentSubmit={onCommentSubmit} />}
-
           </div>
         </aside>
       </section>
