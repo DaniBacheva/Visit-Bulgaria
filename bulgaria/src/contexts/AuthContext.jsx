@@ -2,7 +2,7 @@ import { createContext, useContext } from 'react';
 import { useNavigate } from 'react-router-dom'
 
 import { authServiceFactory } from '../services/authService';
-import { useLocalStorage } from '../hooks/useLocalStarage';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 export const AuthContext = createContext(); // context
 
