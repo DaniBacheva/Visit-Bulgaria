@@ -89,9 +89,9 @@ export default function Register() {
 
   return (
     <section id="register">
-      <div className="form">
+      <div className={styles.form}>
         <h2>Register</h2>
-        <form className="register-form" method='POST' onSubmit={onSubmit}>
+        <form className={styles.registerForm} method='POST' onSubmit={onSubmit}>
           <input
             type="text"
             name="email"
@@ -136,7 +136,7 @@ export default function Register() {
             {errors.fields && (
               <p className={styles.errorMessage}>{errors.fields}</p>
             )}
-          <p className="message">Already registered? <Link to="/login">Login</Link></p>
+          <p className={styles.message}>Already registered? <Link to="/login">Login</Link></p>
         </form>
       </div>
     </section>

@@ -83,10 +83,10 @@ export default function NewPlace() {
 
   return (
     <section id="create">
-      <div className="form">
+      <div className={styles.form}>
         <h2>Add Place</h2>
 
-        <form className="create-form" onSubmit={onSubmit}>
+        <form className={styles.createForm} onSubmit={onSubmit}>
 
           <input value={values.name}
             onChange={changeHandler}

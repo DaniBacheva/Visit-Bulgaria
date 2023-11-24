@@ -7,7 +7,7 @@ import { useAuthContext } from '../../contexts/AuthContext';
 import { usePlaceContext } from '../../contexts/PlaceContext';
 import * as commentService from '../../services/commentService';
 
-import AddComment from './AddComment/AddComments';
+import AddComment from './AddComment/AddComment';
 import DeletePlace from './DeletePlace/DeletePlace';
 
 export default function Details() {
@@ -54,21 +54,12 @@ export default function Details() {
   const onDeleteClick = async () => {
     setShowDelete(true);
   }
-  // const result = confirm(`Are you sure you want to delete ${place.name}?`);
-  //if (result) {
-  //  await placeService.deletePlace(place._id);   delete from server
-  //  deletePlace(place._id)  delete from state
-  //  navigate('/dashboard');
-  // }
-  //}
-
   const deletePlaceHandler = async () => {
     console.log("ok")
     await placeService.deletePlace(place._id);
     deletePlace(place._id)
     navigate('/dashboard');
   }
-
 
   return (
     <>

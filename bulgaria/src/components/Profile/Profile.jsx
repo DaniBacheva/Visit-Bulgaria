@@ -9,6 +9,7 @@ export default function Profile() {
 
     const placesbyOwner = places.filter(p => p._ownerId === userId);
     //console.log(placesbyOwner);
+    
 
     return (
         <>
