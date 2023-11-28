@@ -1,8 +1,8 @@
 import { createContext, useContext } from 'react';
 import { useNavigate } from 'react-router-dom'
 
-import { authServiceFactory } from '../services/authService';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import * as authService from '../services/authService'
 
 export const AuthContext = createContext(); // context
 
@@ -12,16 +12,17 @@ export const AuthProvider = ({  //komponent
     const [auth, setAuth] = useLocalStorage('auth', {});
     const navigate = useNavigate();
 
-    const authService = authServiceFactory(auth.accessToken);
-
     const onRegisterSubmit = async (values) => {
         const { rePassword, ...registerData } = values;
         if (rePassword !== registerData.password) {
             return
         }
         try {
-            const result = await authService.register(registerData);
+            const result = await authService.register(values.email, values.password);
+            
             setAuth(result);
+
+            localStorage.setItem('accessToken', result.accessToken);
 
             navigate('/');
         } catch (error) {
@@ -31,8 +32,10 @@ export const AuthProvider = ({  //komponent
 
     const onLoginSubmit = async (data) => {
         try {
-            const result = await authService.login(data);
+            const result = await authService.login(data.email, data.password);
             setAuth(result);
+
+            localStorage.setItem('accessToken', result.accessToken);
 
             navigate('/');
         } catch (error) {
@@ -41,9 +44,8 @@ export const AuthProvider = ({  //komponent
     };
 
     const onLogout = async () => {
-        await authService.logout();
-
-        setAuth({});
+            setAuth({});
+            localStorage.removeItem('accessToken');
     }
     const contextValues = {
         onLoginSubmit,
@@ -51,7 +53,7 @@ export const AuthProvider = ({  //komponent
         onLogout,
         userId: auth._id,
         token: auth.accessToken,
-        userEmail: auth.email,
+        email: auth.email,
         isAuthenticated: !!auth.accessToken
     }
 
@@ -63,8 +65,7 @@ export const AuthProvider = ({  //komponent
         </>
     )
 }
-export const useAuthContext = () => {  // za da ne import useContext i samiq context
-    const context = useContext(AuthContext);
 
-    return context;
-}
+AuthContext.displayName = 'AuthContext';
+
+export default AuthContext;

@@ -1,18 +1,31 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { useForm } from "../../hooks/useForm";
-import { useService } from "../../hooks/useService";
-import { placeServiceFactory } from "../../services/placeService";
-import { usePlaceContext } from '../../contexts/PlaceContext';
+import * as placeService from '../../services/placeService'
+
 import *as styles from '../EditPage/EditPage.module.css'
 
-
 export default function EditPage() {
-  const { onPlaceEditSubmit } = usePlaceContext()
+const navigate = useNavigate();
   const { placeId } = useParams();
-  const placeService = useService(placeServiceFactory);
+
   const [errors, setErrors] = useState({})
+
+   useEffect(() => {
+    placeService.getOne(placeId)
+      .then(result => {
+        changeValues(result);
+      });
+
+  }, [placeId])
+
+  const onPlaceEditSubmit = async (data) => {
+    const result = await placeService.edit(data._id, data);
+    //console.log(data)
+      
+    navigate(`/dashboard/${data._id}`);
+}
   const { values, changeHandler, onSubmit, changeValues } = useForm({
 
     _id: '',
@@ -26,13 +39,7 @@ export default function EditPage() {
 
   //console.log(values)
 
-  useEffect(() => {
-    placeService.getOne(placeId)
-      .then(result => {
-        changeValues(result);
-      });
-
-  }, [placeId])
+ 
 
   const imageValidate = () => {
     if (values.imageUrl.length < 6) {

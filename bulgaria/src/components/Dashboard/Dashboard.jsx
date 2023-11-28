@@ -1,10 +1,21 @@
-import { usePlaceContext } from "../../contexts/PlaceContext";
+import { useEffect, useState } from "react";
+
+import * as placeService from '../../services/placeService'
 
 import Place from "../Place/Place";
 
 
 export default function Dashboard() {
-    const { places } = usePlaceContext();
+    const [places, setPlaces] = useState([]);
+
+    useEffect(() => {
+        placeService.getAll()
+            .then(result => setPlaces(result))
+            .catch(error => {
+                console.log(error);
+            });
+
+    }, []);
 
     return (
         <>

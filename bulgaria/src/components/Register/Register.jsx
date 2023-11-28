@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom'
 
-import { AuthContext } from "../../contexts/AuthContext";
+import  AuthContext  from "../../contexts/AuthContext";
 import { useForm } from "../../hooks/useForm"
 import * as styles from '../Register/register.module.css'
 
@@ -22,13 +22,8 @@ export default function Register() {
         email: "Email is required",
       }))
     }
-
-    else if (values.email.length < 8) {
-      setErrors(state => ({
-        ...state,
-        email: "Email should be at least 8 symbols",
-      }))
-    } else {
+ 
+    else {
       if (errors.email) {
         setErrors(state => ({ ...state, email: '' }))
       }
@@ -42,12 +37,7 @@ export default function Register() {
         password: "Password is required",
       }))
     }
-    else if (values.password.length < 8) {
-      setErrors(state => ({
-        ...state,
-        password: "Password should be at least 6 symbols",
-      }))
-    } else {
+  else {
       if (errors.password) {
         setErrors(state => ({ ...state, password: '' }))
       }

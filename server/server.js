@@ -1397,8 +1397,18 @@
                 "_createdOn": 1700588189283,
                 "_id": "4666613c-0d9a-4b90-97cd-bb0843b412cd",
                 "_updatedOn": 1700590767081
+            },
+            "35c62d76-8152-4626-8712-eeb96381bea8":
+            {
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "name": "ZHERAVNA",
+                "location": "330 km away from Sofia",
+                "imageUrl": "https://cdn.thecrazytourist.com/wp-content/uploads/2023/01/ccimage-shutterstock_1750890320.jpg",
+                "description": "A showcase in all things Bulgarian National Revival, Zheravna is a rustic and raw picture of one of the country’s most iconic architectural styles of old.",
+                "additionalInfo": "The town itself sits nestled at the base of the mighty Balkan Mountains, between dense thickets of Bosnian pines and white elms, where it seems almost organically formed in its timber-clad, stony appearance.\n\nThe cottages that pepper the cobbled streets all come beautifully restored, with more than 150 examples of the typical hardwood facades on display.\n\nAmidst the buildings, sites like the Yordan Yovkov House and the icon-packed St Nicholas Church draw the biggest crowds, while others will head for the August Dobromiritsa Rural Park nearby, where festivals celebrating Bulgarian folk costumes and music erupt throughout the year.",
+                "_createdOn": 1701029269756,
+                "_id": "11d6a717-8325-4282-a219-19b72cf94d46"
             }
-
         }
     };
     var rules$1 = {

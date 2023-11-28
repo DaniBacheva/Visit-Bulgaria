@@ -1,7 +1,6 @@
 import { Route, Routes, useNavigate } from 'react-router-dom';
 //import RouteGuard from './components/common/RouteGuard';
 
-import { PlaceProvider } from './contexts/PlaceContext';
 import { AuthProvider } from './contexts/AuthContext';
 
 import NewPlace from "./components/NewPlace/NewPlace"
@@ -21,7 +20,7 @@ function App() {
 
     return (
         <AuthProvider>
-            <PlaceProvider>
+        
                 <div id="wrapper">
                     <Header />
 
@@ -47,7 +46,7 @@ function App() {
 
                 </div>
                 <Footer />
-            </PlaceProvider>
+         
         </AuthProvider>
     )
 }

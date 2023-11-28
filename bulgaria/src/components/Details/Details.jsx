@@ -1,22 +1,19 @@
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate, Link, useParams } from 'react-router-dom'
 
-import { placeServiceFactory } from '../../services/placeService'
-import { useService } from '../../hooks/useService';
-import { useAuthContext } from '../../contexts/AuthContext';
-import { usePlaceContext } from '../../contexts/PlaceContext';
+
 import * as commentService from '../../services/commentService';
+import * as placeService from '../../services/placeService';
+import AuthContext from "../../contexts/AuthContext";
 
 import AddComment from './AddComment/AddComment';
 import DeletePlace from './DeletePlace/DeletePlace';
 
 export default function Details() {
-  const { userId, isAuthenticated, userEmail } = useAuthContext();
-  const placeService = useService(placeServiceFactory);
+  const { email, userId, isAuthenticated } = useContext(AuthContext);
   const { placeId } = useParams();
   const [place, setPlace] = useState({});
   const [showDelete, setShowDelete] = useState(false)
-  const { deletePlace } = usePlaceContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,16 +30,16 @@ export default function Details() {
   }, [placeId]);
 
   const onCommentSubmit = async (values) => {
-    const response = await commentService.create(placeId, values.comment);
-    console.log(response);
+    const newComment = await commentService.create(placeId, values.comment);
+    console.log(newComment);
 
     setPlace(state => ({
       ...state,
       comments: [...state.comments,
       {
-        ...response,
+        ...newComment,
         author: {
-          email: userEmail
+          email
         }
       }],
     }))
@@ -56,9 +53,8 @@ export default function Details() {
   }
   const deletePlaceHandler = async () => {
     console.log("ok")
-    await placeService.deletePlace(place._id);
-    deletePlace(place._id)
-    navigate('/dashboard');
+    await placeService.deletePlace(placeId);
+        navigate('/dashboard');
   }
 
   return (
@@ -67,7 +63,6 @@ export default function Details() {
         <DeletePlace
           onClose={() => setShowDelete(false)}
           onDelete={deletePlaceHandler}
-
         />
       )}
       <section id="details">
@@ -104,9 +99,9 @@ export default function Details() {
           <div id="comments">
             <h3>Comments:</h3>
             <ul>
-              {place.comments && place.comments.map(c => (
-                <li key={c._id} >
-                  <p>{c.author.email}:{c.comment}</p>
+              {place.comments && place.comments.map(({_id, comment, owner:{email} }) => (
+                <li key={_id} >
+                  <p>{email}:{comment}</p>
                 </li>
               ))}
             </ul>

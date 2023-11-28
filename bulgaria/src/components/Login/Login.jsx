@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
-import { useAuthContext } from "../../contexts/AuthContext";
+import  AuthContext   from "../../contexts/AuthContext";
 import { useForm } from "../../hooks/useForm"
 import * as styles from '../Login/Login.module.css'
 
 
 export default function Login() {
-  const { onLoginSubmit } = useAuthContext();
+  const { onLoginSubmit } = useContext(AuthContext);
   const [errors, setErrors] = useState({})
   const { values, changeHandler, onSubmit } = useForm({
     email: '',
@@ -22,12 +22,7 @@ export default function Login() {
       }))
     }
 
-    else if (values.email.length < 8) {
-      setErrors(state => ({
-        ...state,
-        email: "Email should be at least 8 symbols",
-      }))
-    } else {
+   else {
       if (errors.email) {
         setErrors(state => ({ ...state, email: '' }))
       }
@@ -41,12 +36,8 @@ export default function Login() {
         password: "Password is required",
       }))
     }
-    else if (values.password.length < 6) {
-      setErrors(state => ({
-        ...state,
-        password: "Email should be at least 6 symbols",
-      }))
-    } else {
+    
+    else {
       if (errors.password) {
         setErrors(state => ({ ...state, password: '' }))
       }

@@ -1,15 +1,24 @@
-import { usePlaceContext } from "../../contexts/PlaceContext";
-import { useAuthContext } from '../../contexts/AuthContext';
+import { useEffect, useState, useContext} from "react";
+
+import AuthContext from "../../contexts/AuthContext";
+import * as placeService from '../../services/placeService'
 
 import Place from "../Place/Place";
 
-export default function Profile() {
-    const { userId } = useAuthContext();
-    const { places } = usePlaceContext();
 
-    const placesbyOwner = places.filter(p => p._ownerId === userId);
-    //console.log(placesbyOwner);
-    
+export default function Profile()  {
+
+    const {userId} = useContext(AuthContext)
+    const [places, setPlaces] = useState([]);
+
+    useEffect(() => {
+        placeService.getPlacesByOwner(userId)
+            .then(result => setPlaces(result))
+            .catch(error => {
+                console.log(error);
+            });
+
+    }, [])
 
     return (
         <>
@@ -17,10 +26,10 @@ export default function Profile() {
             <section id="dashboard">
 
 
-                {placesbyOwner.map(p =>
+                {places.map(p =>
                     <Place {...p} key={p._id} />)}
 
-                {placesbyOwner.length === 0 &&
+                {places.length === 0 &&
                     <h2>No Places yet.</h2>}
 
             </section>

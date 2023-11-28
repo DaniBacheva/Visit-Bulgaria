@@ -1,32 +1,30 @@
-export const requester = async (method, url, data) => {
+const optionsBuild = (data) => {
     const options = {};
 
-    if (method !== 'GET') {
-        options.method = method;
-
-        if (data) {
-            options.headers = {
-                'content-type': 'aplication/json',
-            };
-            options.body = JSON.stringify(data);
-        }
-
+    if (data) {
+        options.body = JSON.stringify(data);
+        options.headers = {
+            'content-type': 'application/json'
+        };
     }
 
-    const serializedAuth = localStorage.getItem('auth');
+    const token = localStorage.getItem('accessToken');
 
-    if (serializedAuth) {
-        const auth = JSON.parse(serializedAuth);
-        console.log(auth.accessToken)
-
-        if (auth.accessToken) {
-            options.headers = {
-                ...options.headers,
-                'X-Authorization': auth.accessToken,
-            }
-        }
+    if (token) {
+        options.headers = {
+            ...options.headers,
+            'X-Authorization': token
+        };
     }
-    const response = await fetch(url, options);
+
+    return options;
+};
+
+const request = async (method, url, data) => {
+    const response = await fetch(url, {
+        ...optionsBuild(data),
+        method,
+    });
 
     if (response.status === 204) {
         return {};
@@ -36,18 +34,13 @@ export const requester = async (method, url, data) => {
 
     if (!response.ok) {
         throw result;
-    }
+    } 
 
     return result;
-
 };
 
-export const requestFactory = () => {
-    return {
-        get: requester.bind(null, "GET"),
-        post: requester.bind(null, "POST"),
-        put: requester.bind(null, "PUT"),
-        del: requester.bind(null, "DELETE"),
-    }
-}
-
+export const get = request.bind(null, 'GET');
+export const post = request.bind(null, 'POST');
+export const put = request.bind(null, 'PUT');
+export const remove = request.bind(null, 'DELETE');
+export const patch = request.bind(null, 'PATCH');

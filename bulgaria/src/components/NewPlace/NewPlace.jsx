@@ -1,12 +1,26 @@
 import { useState } from 'react';
+import { useNavigate} from 'react-router-dom';
 
 import * as styles from '../NewPlace/NewPlace.module.css'
-import { usePlaceContext } from "../../contexts/PlaceContext"
+import * as placeService from '../../services/placeService'
 import { useForm } from "../../hooks/useForm"
 
 export default function NewPlace() {
-  const { onAddPlaceSubmit } = usePlaceContext()
   const [errors, setErrors] = useState({})
+  const navigate = useNavigate();
+
+  const onAddPlaceSubmit = async (data) => {
+       try {
+      const newPlace = await placeService.create(data);
+      console.log(newPlace)
+
+      navigate('/dashboard')
+    }
+    catch (error) {
+      //error notification
+      console.log(error)
+    }
+  }
   const { values, changeHandler, onSubmit } = useForm({
     name: '',
     location: '',
@@ -17,10 +31,10 @@ export default function NewPlace() {
   }, onAddPlaceSubmit)
 
   const imageValidate = () => {
-    if (values.imageUrl.length < 6) {
+    if (values.imageUrl.length === 0 ) {
       setErrors(state => ({
         ...state,
-        image: "Image should be at least 6 symbols",
+        image: "Image is required",
       }))
     } else {
       if (errors.image) {
@@ -30,10 +44,10 @@ export default function NewPlace() {
   }
 
   const nameValidate = () => {
-    if (values.name.length < 6) {
+    if (values.name.length === 0) {
       setErrors(state => ({
         ...state,
-        name: "Name should be at least 6 symbols",
+        name: "Name is required",
       }))
     } else {
       if (errors.name) {
@@ -43,10 +57,10 @@ export default function NewPlace() {
   }
 
   const locationValidate = () => {
-    if (values.location.length < 10) {
+    if (values.location.length === 0) {
       setErrors(state => ({
         ...state,
-        location: "Location should be at least 10 symbols",
+        location: "Location is required",
       }))
     } else {
       if (errors.location) {
@@ -56,10 +70,10 @@ export default function NewPlace() {
   }
 
   const descriptionValidate = () => {
-    if (values.description.length < 15) {
+    if (values.description.length === 0) {
       setErrors(state => ({
         ...state,
-        description: "Description should be at least 15 symbols",
+        description: "Description is required",
       }))
     } else {
       if (errors.description) {
@@ -69,10 +83,10 @@ export default function NewPlace() {
   }
 
   const additionalInfoValidate = () => {
-    if (values.additionalInfo.length < 20) {
+    if (values.additionalInfo.length === 0) {
       setErrors(state => ({
         ...state,
-        additionalInfo: "Additional information should be at least 20 symbols",
+        additionalInfo: "Additional information is required",
       }))
     } else {
       if (errors.additionalInfo) {
@@ -140,7 +154,7 @@ export default function NewPlace() {
           {errors.additionalInfo && (
             <p className={styles.errorMessage}>{errors.additionalInfo}</p>
           )}
-          <button type="submit" disabled={Object.values(errors).some(x=>x)} >Add Place</button>
+          <button type="submit" disabled={Object.values(errors).some(x => x)} >Add Place</button>
 
         </form>
       </div>

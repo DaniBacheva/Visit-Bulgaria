@@ -4,10 +4,12 @@ export const useLocalStorage = (key, initialValue) => {
 
   const [state, setState] = useState(() => { // sinhronno da iz4islim steta - 6te proweri za auth
     const persistedStateJSON = localStorage.getItem(key);
+
     if (persistedStateJSON) {
       const persistedState = JSON.parse(persistedStateJSON);
       return persistedState;
     }
+    
     return initialValue;
   });
 

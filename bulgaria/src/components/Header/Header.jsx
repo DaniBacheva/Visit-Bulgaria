@@ -6,7 +6,7 @@ import * as styles from '../Header/Header.module.css'
 import { AuthContext } from '../../contexts/AuthContext'
 
 export default function Header() {
-  const { isAuthenticated, userEmail } = useContext(AuthContext)
+  const { isAuthenticated, email } = useContext(AuthContext)
   return (
     <header>
 
@@ -16,7 +16,7 @@ export default function Header() {
       <nav>
         <div>
           {isAuthenticated && (
-            <span>Hi, {userEmail}</span>)}
+            <span>Hi, {email}</span>)}
 
           <Link to="/dashboard">DASHBOARD</Link>
 
