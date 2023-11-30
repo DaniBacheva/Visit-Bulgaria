@@ -26,7 +26,7 @@ export const AuthProvider = ({  //komponent
 
             navigate('/');
         } catch (error) {
-            console.log("Try again")
+            console.log(error)
         }
     };
 
@@ -39,7 +39,7 @@ export const AuthProvider = ({  //komponent
 
             navigate('/');
         } catch (error) {
-            console.log("Try again")
+            console.log(error.message)
         }
     };
 

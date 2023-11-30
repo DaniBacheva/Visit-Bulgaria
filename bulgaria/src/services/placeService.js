@@ -30,7 +30,7 @@ export const getPlacesByOwner = async (ownerId) => {
     const result = await request.get(`${baseUrl}?select=${searchQuery}`);
    const places = Object.values(result);
 
-   // console.log(places)
+    console.log(places)
     
    
    

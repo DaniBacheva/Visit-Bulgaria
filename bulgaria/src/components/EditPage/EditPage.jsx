@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import { useForm } from "../../hooks/useForm";
 import * as placeService from '../../services/placeService'
-
 import *as styles from '../EditPage/EditPage.module.css'
 
 export default function EditPage() {

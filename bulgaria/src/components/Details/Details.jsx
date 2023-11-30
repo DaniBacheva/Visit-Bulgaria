@@ -5,6 +5,7 @@ import { useNavigate, Link, useParams } from 'react-router-dom'
 import * as commentService from '../../services/commentService';
 import * as placeService from '../../services/placeService';
 import AuthContext from "../../contexts/AuthContext";
+import * as styles from '../Details/Details.module.css'
 
 import AddComment from './AddComment/AddComment';
 import DeletePlace from './DeletePlace/DeletePlace';
@@ -38,7 +39,7 @@ export default function Details() {
       comments: [...state.comments,
       {
         ...newComment,
-        author: {
+        owner: {
           email
         }
       }],
@@ -84,12 +85,11 @@ export default function Details() {
             </div>
           </div>
 
-          <div id="action-buttons">
+          <div className={styles.actionButtons}>
             {isOwner && (
               <>
-                <Link to={`/dashboard/${place._id}/edit`} id="edit-btn">Edit</Link>
-                <button onClick={onDeleteClick}
-                  id="delete-btn">Delete</button>
+                <Link to={`/dashboard/${place._id}/edit`} >Edit</Link>
+                <button onClick={onDeleteClick} >Delete</button>
               </>
             )}
           </div>
@@ -101,7 +101,7 @@ export default function Details() {
             <ul>
               {place.comments && place.comments.map(({_id, comment, owner:{email} }) => (
                 <li key={_id} >
-                  <p>{email}:{comment}</p>
+                  <p>{`${email} : ${ comment}`}</p>
                 </li>
               ))}
             </ul>
