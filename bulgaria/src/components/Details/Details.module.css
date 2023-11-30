@@ -1,46 +1,66 @@
+.basic h4 {
+  font-size: 21px;
+  text-decoration: underline;
+  text-transform: uppercase;
+  margin: 20px 10px 10px;
+}
+
+.basic p {
+  font-size: 20px;
+  margin: 0 50px 0;
+}
+
+.basic img {
+  margin: 0;
+  position: calc();
+
+}
 
 .actionButtons {
-    display: flex;
-    justify-content:center;
-    margin-bottom: 65px;
-  
-  }
-  
-  .actionButtons button {
-    text-decoration: none;
-    margin: auto 50px;
-    margin-bottom: 10px;
-    font-size: 21px;
-    height: 50px;
-    width: 130px;
-    text-align:calc();
-    color: white;
-    background: rgb(156, 244, 144);
-    text-shadow: 1px 1px black;
-    border-radius: 5px;
-    border:none
-  }
-  .actionButtons button:hover {
-    background: #f0d68c;
-    color: rgb(21, 18, 19);
-  }
-  
-  .actionButtons a {
-    text-decoration: none;
-    margin: auto 50px;
-    margin-bottom: 10px;
-    font-size: 21px;
-    height: 50px;
-    width: 130px;
-    text-align:calc();
-    color: white;
-    background: rgb(156, 244, 144);
-    text-shadow: 1px 1px black;
-    border-radius: 5px;
-    border:none
-  }
-  
-  .actionButtons a:hover {
-    background: #f0d68c;
-    color: rgb(21, 18, 19);
-  }
+  display: flex;
+  justify-content: center;
+  margin-bottom: 65px;
+
+}
+
+.actionButtons button {
+  text-decoration: none;
+  margin: auto 50px;
+  margin-bottom: 10px;
+  font-size: 21px;
+  height: 50px;
+  width: 130px;
+  color: white;
+  background: rgb(156, 244, 144);
+  text-shadow: 1px 1px black;
+  border-radius: 5px;
+  border: none;
+  line-height: 0;
+  text-align: center;
+}
+
+.actionButtons button:hover {
+  background: #f0d68c;
+  color: rgb(21, 18, 19);
+}
+
+.actionButtons a {
+  text-decoration: none;
+  margin: auto 50px;
+  margin-bottom: 10px;
+  font-size: 21px;
+  height: 50px;
+  width: 130px;
+  color: white;
+  background: rgb(156, 244, 144);
+  text-shadow: 1px 1px black;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+  line-height:  2.5;
+}
+
+.actionButtons a:hover {
+  background: #f0d68c;
+  color: rgb(21, 18, 19);
+}

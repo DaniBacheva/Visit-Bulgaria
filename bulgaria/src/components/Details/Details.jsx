@@ -55,7 +55,7 @@ export default function Details() {
   const deletePlaceHandler = async () => {
     console.log("ok")
     await placeService.deletePlace(placeId);
-        navigate('/dashboard');
+    navigate('/dashboard');
   }
 
   return (
@@ -69,8 +69,8 @@ export default function Details() {
       )}
       <section id="details">
         <div id="details-wrapper">
-          <div className="basic">
-            <p id="details-name">{place.name}</p>
+          <div className={styles.basic}>
+            <h4 id="details-name">{place.name}</h4>
             <img id="details-img" src={place.imageUrl} />
             <p id="location">Location: {`${place.location}`}</p>
           </div>
@@ -100,15 +100,15 @@ export default function Details() {
           <div id="comments">
             <h3>Comments:</h3>
             <ul>
-              {place.comments && place.comments.map(({_id, comment, owner:{email} }) => (
+              {place.comments && place.comments.map(({ _id, comment, owner: { email } }) => (
                 <li key={_id} >
-                  <p>{`${email} : ${ comment}`}</p>
+                  <p>{`${email} : ${comment}`}</p>
                 </li>
               ))}
+
+              {!place.comments?.length && (
+                <p>No comments yet</p>)}
             </ul>
-            {!place.comments?.length && (
-              <p>No comments yet</p>
-            )}
             {isAuthenticated && <AddComment onCommentSubmit={onCommentSubmit} />}
           </div>
         </aside>

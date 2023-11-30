@@ -1,8 +1,10 @@
-import { Route, Routes, useNavigate } from 'react-router-dom';
-//import RouteGuard from './components/common/RouteGuard';
+import { Route, RouterProvider, Routes } from 'react-router-dom';
+
 
 import { AuthProvider } from './contexts/AuthContext';
+import Path from './paths.js';
 
+import RouteGuard from './components/common/RouteGuard';
 import NewPlace from "./components/NewPlace/NewPlace"
 import Dashboard from "./components/Dashboard/Dashboard"
 import Details from "./components/Details/Details"
@@ -20,33 +22,28 @@ function App() {
 
     return (
         <AuthProvider>
-        
-                <div id="wrapper">
-                    <Header />
 
-                    <main>
-                        <Routes>
-                            <Route path='/' element={<Home />} />
-                            <Route path='/login' element={<Login />} />
-                            <Route path='/logout' element={<Logout />} />
-                            <Route path='/register' element={<Register />} />
-                            <Route path='/dashboard' element={<Dashboard />} />
-                            <Route path='/new-place' element={
-                                //  <RouteGuard>
-                                <NewPlace />
-                                // </RouteGuard>
-                            } />
-                            <Route path='/dashboard/:placeId' element={<Details />} />
-                            <Route path='/dashboard/:placeId/edit' element={<EditPage />} />
-                            <Route path='/profile' element={<Profile />} />
+            <div id="wrapper">
+                <Header />
 
-                        </Routes>
+                <main>
+                    <Routes>
+                        <Route path={Path.Home} element={<Home />} />
+                        <Route path={Path.Login} element={<Login />} />
+                        <Route path={Path.Logout} element={<Logout />} />
+                        <Route path={Path.Register} element={<Register />} />
+                        <Route path={Path.Dashboard} element={<Dashboard />} />
+                        <Route path={Path.DetailsPlace} element={<Details />} />
 
-                    </main>
-
-                </div>
-                <Footer />
-         
+                        <Route element={<RouteGuard />}>
+                            <Route path={Path.NewPlace} element={<NewPlace />} />
+                            <Route path={Path.EditPlace} element={<EditPage />} />
+                            <Route path={Path.Profile} element={<Profile />} />
+                        </Route>
+                    </Routes>
+                </main>
+            </div>
+            <Footer />
         </AuthProvider>
     )
 }

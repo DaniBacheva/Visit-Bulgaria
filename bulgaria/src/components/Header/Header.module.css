@@ -1,5 +1,6 @@
 header {
-    background-color: #dcfa8f;
+    background-color: #8ffa94;
+    color: black;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,7 +18,7 @@ nav {
 
 nav a {
     font-size: 1.5rem;
-    color: rgb(78, 223, 129);
+    color: rgb(45, 65, 52);
     font-weight: 400;  
     text-shadow: 1px 1px rgb(243, 141, 141);
   }
