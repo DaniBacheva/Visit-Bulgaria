@@ -22,7 +22,8 @@ button:hover{
 .cancelbtn, .deletebtn {
   float: left;
   width: 30%;
-
+  display: flex;
+ 
 }
 
 /* Add a color to the cancel button -----------------*/
@@ -35,10 +36,17 @@ button:hover{
 
 /* Add padding and center-align text to the container---------------------- */
 .container {
-  padding: 16px;
+  padding: 10px;
   text-align: center;
   border: 1px solid;
   background-color: #ccc;
+  display:flex;
+}
+
+.detailsImg {
+  margin: 40px 20px 20px;
+  height: 30%;
+width: 60%;
 }
 
 /* The Modal (background) ---------------------*/
@@ -68,8 +76,14 @@ hr {
   margin-bottom: 25px;
 }
 
-h1 {
-  font-size: large;
+.confirm {
+  width: 100%;
+}
+
+.modal h1 {
+  margin-top: 10px;
+  font-size: 24px;
+  margin: 5px;
 }
 p {
   text-align: left;

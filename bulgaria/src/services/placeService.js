@@ -26,11 +26,11 @@ const baseUrl = 'http://localhost:3030/data/places';
 export  const deletePlace =async  (placeId) =>  request.remove(`${baseUrl}/${placeId}`);
 
 export const getPlacesByOwner = async (ownerId) => {
-    const searchQuery = encodeURIComponent(`ownerId="${ownerId}"`);
-    const result = await request.get(`${baseUrl}?select=${searchQuery}`);
-   const places = Object.values(result);
+    const searchQuery = encodeURIComponent(`_ownerId="${ownerId}"`);
+    const result = await request.get(`${baseUrl}?where=${searchQuery}`);
+    const places = Object.values(result);
 
-    console.log(places)
+   // console.log(places)
     
    
    

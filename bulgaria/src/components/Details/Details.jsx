@@ -64,6 +64,7 @@ export default function Details() {
         <DeletePlace
           onClose={() => setShowDelete(false)}
           onDelete={deletePlaceHandler}
+          values={place}
         />
       )}
       <section id="details">
