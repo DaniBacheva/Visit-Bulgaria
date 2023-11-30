@@ -7,7 +7,7 @@ import * as styles from '../Register/register.module.css'
 
 export default function Register() {
   const [errors, setErrors] = useState({})
-  const { onRegisterSubmit } = useContext(AuthContext);
+  const {onRegisterSubmit, error} = useContext(AuthContext);
 
   const { values, changeHandler, onSubmit } = useForm({
     email: '',
@@ -63,21 +63,7 @@ export default function Register() {
     }
   }
 
-  const fieldsValidate = () => {
-    if (values.rePassword.length == 0|| values.password.length==0 || values.email==0) {
-      setErrors(state => ({
-        ...state,
-        fields: "All fields is required",
-      }))
-    }
-      else {
-      if (errors.fields) {
-        setErrors(state => ({ ...state, fields: '' }))
-      }
-    }
-  }
-
-  return (
+   return (
     <section id="register">
       <div className={styles.form}>
         <h2>Register</h2>
@@ -121,11 +107,10 @@ export default function Register() {
               <p className={styles.errorMessage}>{errors.rePassword}</p>
             )}
          
-          <button type="submit"
-          onMouseOver={fieldsValidate}  >register</button>
-            {errors.fields && (
-              <p className={styles.errorMessage}>{errors.fields}</p>
-            )}
+          <button type="submit" >register</button>
+          {<error className="register"></error> && (
+            <p className={styles.errorMessage}>{error.register}</p>
+          )}
           <p className={styles.message}>Already registered? <Link to="/login">Login</Link></p>
         </form>
       </div>

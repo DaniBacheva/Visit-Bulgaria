@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext, useState} from 'react';
 import { useNavigate } from 'react-router-dom'
 
 import { useLocalStorage } from '../hooks/useLocalStorage';
@@ -11,26 +11,35 @@ export const AuthProvider = ({  //komponent
 }) => {
     const [auth, setAuth] = useLocalStorage('auth', {});
     const navigate = useNavigate();
+    const [error, setError] = useState({});
 
     const onRegisterSubmit = async (values) => {
+   setError({})
         const { rePassword, ...registerData } = values;
         if (rePassword !== registerData.password) {
-            return
+            return;
         }
         try {
             const result = await authService.register(values.email, values.password);
-            
+
             setAuth(result);
 
             localStorage.setItem('accessToken', result.accessToken);
 
             navigate('/');
-        } catch (error) {
-            console.log(error)
+        }  
+        catch (error) {
+             console.log(error.message);
+             setError(state => ({
+                ...state,
+                register: error.message,
+              }))
         }
+      
     };
 
     const onLoginSubmit = async (data) => {
+        setError({})
         try {
             const result = await authService.login(data.email, data.password);
             setAuth(result);
@@ -38,16 +47,23 @@ export const AuthProvider = ({  //komponent
             localStorage.setItem('accessToken', result.accessToken);
 
             navigate('/');
-        } catch (error) {
+        } 
+        catch (error) {
             console.log(error.message)
+            setError(state => ({
+                ...state,
+                login: error.message,
+              }));
         }
+        
     };
 
     const onLogout = async () => {
-            setAuth({});
-            localStorage.removeItem('accessToken');
+        setAuth({});
+        localStorage.removeItem('accessToken');
     }
     const contextValues = {
+        error,
         onLoginSubmit,
         onRegisterSubmit,
         onLogout,

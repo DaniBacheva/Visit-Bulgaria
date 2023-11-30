@@ -160,4 +160,4 @@ export default function NewPlace() {
       </div>
     </section>
   )
-}
+}// disabled={Object.values(errors).some(x => x)}

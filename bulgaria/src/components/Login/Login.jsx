@@ -1,18 +1,19 @@
 import { Link } from 'react-router-dom'
 import { useContext, useState } from 'react'
 
-import  AuthContext   from "../../contexts/AuthContext";
+import AuthContext from "../../contexts/AuthContext";
 import { useForm } from "../../hooks/useForm"
 import * as styles from '../Login/Login.module.css'
 
 
 export default function Login() {
-  const { onLoginSubmit } = useContext(AuthContext);
+  const { onLoginSubmit, error } = useContext(AuthContext);
   const [errors, setErrors] = useState({})
   const { values, changeHandler, onSubmit } = useForm({
     email: '',
     password: ''
   }, onLoginSubmit);
+
 
   const emailValidate = () => {
     if (values.email.length == 0) {
@@ -22,7 +23,7 @@ export default function Login() {
       }))
     }
 
-   else {
+    else {
       if (errors.email) {
         setErrors(state => ({ ...state, email: '' }))
       }
@@ -36,7 +37,7 @@ export default function Login() {
         password: "Password is required",
       }))
     }
-    
+
     else {
       if (errors.password) {
         setErrors(state => ({ ...state, password: '' }))
@@ -76,7 +77,10 @@ export default function Login() {
             <p className={styles.errorMessage}>{errors.password}</p>
           )}
 
-          <button type="submit" disabled={Object.values(errors).some(x => x)}>login</button>
+          <button type="submit">login</button>
+          {error.login && (
+            <p className={styles.errorMessage}>{error.login}</p>
+          )}
           <p className={styles.message}>
             Not registered? <Link to="/register">Create an account</Link>
           </p>
