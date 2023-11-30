@@ -4,6 +4,7 @@ import { useContext, useState } from 'react'
 import AuthContext from "../../contexts/AuthContext";
 import { useForm } from "../../hooks/useForm"
 import * as styles from '../Login/Login.module.css'
+import formValidate from '../common/errorHelper.js';
 
 
 export default function Login() {
@@ -15,35 +16,12 @@ export default function Login() {
   }, onLoginSubmit);
 
 
-  const emailValidate = () => {
-    if (values.email.length == 0) {
-      setErrors(state => ({
-        ...state,
-        email: "Email is required",
-      }))
-    }
-
-    else {
-      if (errors.email) {
-        setErrors(state => ({ ...state, email: '' }))
-      }
-    }
+  const validate = (e)=> {
+    const errors = formValidate(e);
+    setErrors(errors)
+    console.log(errors)
   }
 
-  const passwordValidate = () => {
-    if (values.password.length == 0) {
-      setErrors(state => ({
-        ...state,
-        password: "Password is required",
-      }))
-    }
-
-    else {
-      if (errors.password) {
-        setErrors(state => ({ ...state, password: '' }))
-      }
-    }
-  }
 
 
   return (
@@ -58,7 +36,7 @@ export default function Login() {
             id="email" placeholder="email"
             value={values.email}
             onChange={changeHandler}
-            onBlur={emailValidate}
+            onBlur={validate}
             className={errors.email && styles.inputError} />
           {errors.email && (
             <p className={styles.errorMessage}>{errors.email}</p>
@@ -71,7 +49,7 @@ export default function Login() {
             placeholder="password"
             value={values.password}
             onChange={changeHandler}
-            onBlur={passwordValidate}
+            onBlur={validate}
             className={errors.password && styles.inputError} />
           {errors.password && (
             <p className={styles.errorMessage}>{errors.password}</p>

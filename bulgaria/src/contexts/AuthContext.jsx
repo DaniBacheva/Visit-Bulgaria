@@ -1,4 +1,4 @@
-import { createContext, useState} from 'react';
+import { createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 
 import { useLocalStorage } from '../hooks/useLocalStorage';
@@ -14,7 +14,7 @@ export const AuthProvider = ({  //komponent
     const [error, setError] = useState({});
 
     const onRegisterSubmit = async (values) => {
-   setError({})
+        setError({})
         const { rePassword, ...registerData } = values;
         if (rePassword !== registerData.password) {
             return;
@@ -27,15 +27,15 @@ export const AuthProvider = ({  //komponent
             localStorage.setItem('accessToken', result.accessToken);
 
             navigate('/');
-        }  
+        }
         catch (error) {
-             console.log(error.message);
-             setError(state => ({
+            console.log(error.message);
+            setError(state => ({
                 ...state,
                 register: error.message,
-              }))
+            }))
         }
-      
+
     };
 
     const onLoginSubmit = async (data) => {
@@ -47,15 +47,15 @@ export const AuthProvider = ({  //komponent
             localStorage.setItem('accessToken', result.accessToken);
 
             navigate('/');
-        } 
+        }
         catch (error) {
             console.log(error.message)
             setError(state => ({
                 ...state,
                 login: error.message,
-              }));
+            }));
         }
-        
+
     };
 
     const onLogout = async () => {

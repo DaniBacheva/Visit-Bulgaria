@@ -62,3 +62,35 @@ const imageValidate = () => {
       }
     }
   }
+
+
+
+  const emailValidate = () => {
+    if (values.email.length == 0) {
+      setErrors(state => ({
+        ...state,
+        email: "Email is required",
+      }))
+    }
+
+    else {
+      if (errors.email) {
+        setErrors(state => ({ ...state, email: '' }))
+      }
+    }
+  }
+
+  const passwordValidate = () => {
+    if (values.password.length == 0) {
+      setErrors(state => ({
+        ...state,
+        password: "Password is required",
+      }))
+    }
+
+    else {
+      if (errors.password) {
+        setErrors(state => ({ ...state, password: '' }))
+      }
+    }
+  }

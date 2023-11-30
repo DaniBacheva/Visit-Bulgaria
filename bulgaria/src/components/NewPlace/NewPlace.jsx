@@ -13,12 +13,12 @@ export default function NewPlace() {
   const onAddPlaceSubmit = async (data) => {
     try {
       const newPlace = await placeService.create(data);
-      console.log(newPlace)
+      //console.log(newPlace)
 
       navigate('/dashboard')
     }
     catch (error) {
-      //error notification
+      
       console.log(error)
     }
   }
@@ -34,6 +34,7 @@ export default function NewPlace() {
   const validate = (e)=> {
     const errors = formValidate(e);
     setErrors(errors)
+    console.log(errors)
   }
 
 
@@ -96,7 +97,7 @@ export default function NewPlace() {
           {errors.additionalInfo && (
             <p className={styles.errorMessage}>{errors.additionalInfo}</p>
           )}
-          <button type="submit" disabled={Object.values(errors)>0} >Add Place</button>
+          <button type="submit" disabled={Object.keys(errors)>0} >Add Place</button>
 
         </form>
       </div>
