@@ -1,16 +1,17 @@
 import { useState } from 'react';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import * as styles from '../NewPlace/NewPlace.module.css'
 import * as placeService from '../../services/placeService'
 import { useForm } from "../../hooks/useForm"
+import formValidate from '../common/errorHelper.js';
 
 export default function NewPlace() {
   const [errors, setErrors] = useState({})
   const navigate = useNavigate();
 
   const onAddPlaceSubmit = async (data) => {
-       try {
+    try {
       const newPlace = await placeService.create(data);
       console.log(newPlace)
 
@@ -28,72 +29,13 @@ export default function NewPlace() {
     description: '',
     additionalInfo: '',
 
-  }, onAddPlaceSubmit)
+  }, onAddPlaceSubmit);
 
-  const imageValidate = () => {
-    if (values.imageUrl.length === 0 ) {
-      setErrors(state => ({
-        ...state,
-        image: "Image is required",
-      }))
-    } else {
-      if (errors.image) {
-        setErrors(state => ({ ...state, image: '' }))
-      }
-    }
+  const validate = (e)=> {
+    const errors = formValidate(e);
+    setErrors(errors)
   }
 
-  const nameValidate = () => {
-    if (values.name.length === 0) {
-      setErrors(state => ({
-        ...state,
-        name: "Name is required",
-      }))
-    } else {
-      if (errors.name) {
-        setErrors(state => ({ ...state, name: '' }))
-      }
-    }
-  }
-
-  const locationValidate = () => {
-    if (values.location.length === 0) {
-      setErrors(state => ({
-        ...state,
-        location: "Location is required",
-      }))
-    } else {
-      if (errors.location) {
-        setErrors(state => ({ ...state, location: '' }))
-      }
-    }
-  }
-
-  const descriptionValidate = () => {
-    if (values.description.length === 0) {
-      setErrors(state => ({
-        ...state,
-        description: "Description is required",
-      }))
-    } else {
-      if (errors.description) {
-        setErrors(state => ({ ...state, description: '' }))
-      }
-    }
-  }
-
-  const additionalInfoValidate = () => {
-    if (values.additionalInfo.length === 0) {
-      setErrors(state => ({
-        ...state,
-        additionalInfo: "Additional information is required",
-      }))
-    } else {
-      if (errors.additionalInfo) {
-        setErrors(state => ({ ...state, additionalInfo: '' }))
-      }
-    }
-  }
 
   return (
     <section id="create">
@@ -104,7 +46,7 @@ export default function NewPlace() {
 
           <input value={values.name}
             onChange={changeHandler}
-            onBlur={nameValidate}
+            onBlur={validate}
             type="text" name="name"
             id="name" placeholder="Name"
             className={errors.name && styles.inputError} />
@@ -114,7 +56,7 @@ export default function NewPlace() {
 
           <input value={values.location}
             onChange={changeHandler}
-            onBlur={locationValidate}
+            onBlur={validate}
             type="text" name="location"
             id="location" placeholder="Location"
             className={errors.location && styles.inputError}
@@ -125,7 +67,7 @@ export default function NewPlace() {
 
           <input value={values.imageUrl}
             onChange={changeHandler}
-            onBlur={imageValidate}
+            onBlur={validate}
             type="text" name="imageUrl"
             id="imageUrl" placeholder="Image URL"
             className={errors.image && styles.inputError} />
@@ -135,7 +77,7 @@ export default function NewPlace() {
 
           <textarea value={values.description}
             onChange={changeHandler}
-            onBlur={descriptionValidate}
+            onBlur={validate}
             id="description" name="description"
             placeholder="Description" rows="5" cols="50"
             className={errors.description && styles.inputError}>
@@ -147,17 +89,19 @@ export default function NewPlace() {
 
           <textarea value={values.additionalInfo}
             onChange={changeHandler}
-            onBlur={additionalInfoValidate}
+            onBlur={validate}
             id="additional-info" name="additionalInfo"
             placeholder="AdditionalInfo" rows="8" cols="50"
             className={errors.additionalInfo && styles.inputError}></textarea>
           {errors.additionalInfo && (
             <p className={styles.errorMessage}>{errors.additionalInfo}</p>
           )}
-          <button type="submit" disabled={Object.values(errors).some(x => x)} >Add Place</button>
+          <button type="submit" disabled={Object.values(errors)>0} >Add Place</button>
 
         </form>
       </div>
     </section>
   )
-}// disabled={Object.values(errors).some(x => x)}
+}
+
+//.some(x => x)
