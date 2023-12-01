@@ -53,8 +53,7 @@ export default function Details() {
     setShowDelete(true);
   }
   const deletePlaceHandler = async () => {
-    console.log("ok")
-    await placeService.deletePlace(placeId);
+      await placeService.deletePlace(placeId);
     navigate('/dashboard');
   }
 

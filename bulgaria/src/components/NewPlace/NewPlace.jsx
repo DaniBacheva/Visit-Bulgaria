@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as styles from '../NewPlace/NewPlace.module.css'
@@ -8,7 +8,18 @@ import formValidate from '../common/errorHelper.js';
 
 export default function NewPlace() {
   const [errors, setErrors] = useState({})
+  const [notValidate, setNotValidate] = useState(false)
   const navigate = useNavigate();
+
+  const validate = (e) => {
+    const errors = formValidate(e);
+    setErrors(errors)
+    console.log({ errors })
+
+    if (Object.values(errors).some(e => e)) {
+      setNotValidate(true)
+    }
+  }
 
   const onAddPlaceSubmit = async (data) => {
     try {
@@ -18,7 +29,7 @@ export default function NewPlace() {
       navigate('/dashboard')
     }
     catch (error) {
-      
+
       console.log(error)
     }
   }
@@ -31,11 +42,7 @@ export default function NewPlace() {
 
   }, onAddPlaceSubmit);
 
-  const validate = (e)=> {
-    const errors = formValidate(e);
-    setErrors(errors)
-    console.log(errors)
-  }
+
 
 
   return (
@@ -97,8 +104,7 @@ export default function NewPlace() {
           {errors.additionalInfo && (
             <p className={styles.errorMessage}>{errors.additionalInfo}</p>
           )}
-          <button type="submit" disabled={Object.keys(errors)>0} >Add Place</button>
-
+          <button type="submit" disabled={notValidate} >Add Place</button>
         </form>
       </div>
     </section>

@@ -94,3 +94,15 @@ const imageValidate = () => {
       }
     }
   }
+
+
+  if (values.comment.length === 0) {
+    setError(state => ({
+        ...state,
+        comment: "Text is required",
+    }))
+    console.log({error});
+     }
+if (Object.values(error).length>0) {
+    setNotValidate(true);
+  }

@@ -15,14 +15,11 @@ export default function Login() {
     password: ''
   }, onLoginSubmit);
 
-
   const validate = (e)=> {
     const errors = formValidate(e);
     setErrors(errors)
     console.log(errors)
   }
-
-
 
   return (
     <section className="login">
@@ -37,8 +34,8 @@ export default function Login() {
             value={values.email}
             onChange={changeHandler}
             onBlur={validate}
-            className={errors.email && styles.inputError} />
-          {errors.email && (
+            className={errors?.email && styles.inputError} />
+          {errors?.email && (
             <p className={styles.errorMessage}>{errors.email}</p>
           )}
 

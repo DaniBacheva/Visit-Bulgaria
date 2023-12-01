@@ -2,6 +2,7 @@ export default function formValidate(e) {
     const value = e.target.value;
 
     const errors = {};
+    let checkPassword = '';
 
     if (e.target.name === 'name' && (value.length === 0)) {
         errors.name = 'Name is required';
@@ -26,11 +27,23 @@ export default function formValidate(e) {
         errors.email = 'Email is required';
     }
 
-    if (e.target.name === 'password' && (value.length === 0)) {
-        errors.password = 'Password is required';
+    if (e.target.name === 'password') {
+        if (value.length === 0) {
+            errors.password = 'Password is required';
+        }
+        else {
+            checkPassword = value;
+        }
     }
-
-
+    if (e.target.name === 'rePassword') {
+        if (value.length === 0) {
+            errors.rePassword = 'Repeat password is required';
+        }
+        else if (value !== checkPassword) {
+            errors.rePassword = 'Passwords do not match';
+            return;
+        }
+    }
 
     return errors;
 }
