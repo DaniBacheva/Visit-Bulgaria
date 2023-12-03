@@ -4,7 +4,6 @@ import * as placeService from '../../services/placeService';
 
 import Place from "../Place/Place";
 
-
 export default function Dashboard() {
     const [places, setPlaces] = useState([]);
 
@@ -14,7 +13,6 @@ export default function Dashboard() {
             .catch(error => {
                 console.log(error);
             });
-
     }, []);
 
     return (

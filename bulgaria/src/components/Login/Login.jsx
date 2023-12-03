@@ -1,24 +1,24 @@
-import { Link } from 'react-router-dom'
-import { useContext, useState } from 'react'
+import { Link } from 'react-router-dom';
+import { useContext, useState } from 'react';
 
 import AuthContext from "../../contexts/AuthContext";
-import { useForm } from "../../hooks/useForm"
-import * as styles from '../Login/Login.module.css'
+import { useForm } from "../../hooks/useForm";
+import * as styles from '../Login/Login.module.css';
 import formValidate from '../common/errorHelper.js';
 
 
 export default function Login() {
   const { onLoginSubmit, error } = useContext(AuthContext);
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState({});
   const { values, changeHandler, onSubmit } = useForm({
     email: '',
     password: ''
   }, onLoginSubmit);
 
-  const validate = (e)=> {
+  const validate = (e) => {
     const errors = formValidate(e);
-    setErrors(errors)
-     }
+    setErrors(errors);
+  };
 
   return (
     <section className="login">

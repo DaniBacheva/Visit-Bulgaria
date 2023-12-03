@@ -2,12 +2,12 @@ import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom'
 
 import  AuthContext  from "../../contexts/AuthContext";
-import { useForm } from "../../hooks/useForm"
-import * as styles from '../Register/register.module.css'
+import { useForm } from "../../hooks/useForm";
+import * as styles from '../Register/register.module.css';
 import formValidate from '../common/errorHelper.js';
 
 export default function Register() {
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState({});
   const {onRegisterSubmit, error} = useContext(AuthContext);
 
   const { values, changeHandler, onSubmit } = useForm({
@@ -20,7 +20,7 @@ export default function Register() {
     const errors = formValidate(e);
     setErrors(errors)
     console.log(errors)
-  }
+  };
 
   
   const rePasswordValidate = () => {
@@ -40,7 +40,7 @@ export default function Register() {
         setErrors(state => ({ ...state, rePassword: '' }))
       }
     }
-  }
+  };
 
    return (
     <section id="register">

@@ -10,13 +10,12 @@ export default function AddComment({
     const [error, setErrors] = useState({})
     const { values, changeHandler, onSubmit } = useForm({
         comment: ''
-    }, onCommentSubmit)
+    }, onCommentSubmit);
 
     const validate = (e) => {
         const errors = formValidate(e);
         setErrors(errors);
         console.log(Object.values(errors));
-
     }
 
     return (
@@ -32,7 +31,7 @@ export default function AddComment({
                     {error.comment && (
                         <p className={styles.errorMessage}>{error.comment}</p>
                     )}
-                    <input className="btn submit" disabled={Object.values(error).length!==0} type="submit" value="Add Comment" />
+                    <input className="btn submit" disabled={Object.values(error).length !== 0} type="submit" value="Add Comment" />
                 </form>
             </article>
         </>

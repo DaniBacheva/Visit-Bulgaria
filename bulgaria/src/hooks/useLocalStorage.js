@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
 export const useLocalStorage = (key, initialValue) => {
 
@@ -25,7 +25,7 @@ export const useLocalStorage = (key, initialValue) => {
       serializedValue = JSON.stringify(value);
     }
 
-    localStorage.setItem(key, serializedValue)
+    localStorage.setItem(key, serializedValue);
   };
 
   return [

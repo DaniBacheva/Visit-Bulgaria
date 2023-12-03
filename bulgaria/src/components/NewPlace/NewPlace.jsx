@@ -8,7 +8,6 @@ import formValidate from '../common/errorHelper.js';
 
 export default function NewPlace() {
   const [errors, setErrors] = useState({});
-  //const [notValidate, setNotValidate] = useState(false);
   const navigate = useNavigate();
 
   const validate = (e) => {
@@ -21,15 +20,17 @@ export default function NewPlace() {
     try {
       await placeService.create(data);
 
-      navigate('/dashboard')
+      navigate('/dashboard');
     }
     catch (error) {
       setErrors(state => ({
         ...state,
         addPlace: error.message,
       }));
+      console.log( error.addPlace);
     }
-  }
+  };
+
   const { values, changeHandler, onSubmit } = useForm({
     name: '',
     location: '',
@@ -38,7 +39,6 @@ export default function NewPlace() {
     additionalInfo: '',
 
   }, onAddPlaceSubmit);
-
 
   return (
     <section id="create">

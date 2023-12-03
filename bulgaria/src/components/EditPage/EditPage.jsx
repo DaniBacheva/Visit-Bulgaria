@@ -9,7 +9,6 @@ import formValidate from '../common/errorHelper.js';
 export default function EditPage() {
   const navigate = useNavigate();
   const { placeId } = useParams();
-
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -22,19 +21,23 @@ export default function EditPage() {
 
   const validate = (e) => {
     const errors = formValidate(e);
-    setErrors(errors)
-    console.log(Object.values(errors))
-  
-  }
+    setErrors(errors);
+    console.log(Object.values(errors));
+  };
 
   const onPlaceEditSubmit = async (data) => {
-    await placeService.edit(data._id, data);
-    //console.log(data)
+    try {
+      await placeService.edit(data._id, data);
 
-    navigate(`/dashboard/${data._id}`);
-  }
+      navigate(`/dashboard/${data._id}`);
+
+    }
+    catch (error) {
+      console.log('There is a problem')
+    }
+  };
+
   const { values, changeHandler, onSubmit, changeValues } = useForm({
-
     _id: '',
     name: '',
     location: '',
@@ -42,9 +45,7 @@ export default function EditPage() {
     description: '',
     additionalInfo: '',
 
-  }, onPlaceEditSubmit)
-
-  //console.log(values)
+  }, onPlaceEditSubmit);
 
   return (
     <section id="edit">
@@ -120,8 +121,8 @@ export default function EditPage() {
             <p className={styles.errorMessage}>{errors.additionalInfo}</p>
           )}
 
-          <button type="submit" disabled={Object.values(errors).length>0} >Post</button>
-          {Object.values(errors).length>0 && (
+          <button type="submit" disabled={Object.values(errors).length > 0} >Post</button>
+          {Object.values(errors).length > 0 && (
             <p className={styles.errorMessage}>All fields are required</p>
           )}
         </form>

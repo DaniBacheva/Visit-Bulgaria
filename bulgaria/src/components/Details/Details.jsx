@@ -1,10 +1,9 @@
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate, Link, useParams } from 'react-router-dom'
 
-
+import AuthContext from "../../contexts/AuthContext";
 import * as commentService from '../../services/commentService';
 import * as placeService from '../../services/placeService';
-import AuthContext from "../../contexts/AuthContext";
 import * as styles from '../Details/Details.module.css'
 
 import AddComment from './AddComment/AddComment';
@@ -31,31 +30,40 @@ export default function Details() {
   }, [placeId]);
 
   const onCommentSubmit = async (values) => {
-    const newComment = await commentService.create(placeId, values.comment);
-    console.log(newComment);
+    try {
+      const newComment = await commentService.create(placeId, values.comment);
+      console.log(newComment);
 
-    setPlace(state => ({
-      ...state,
-      comments: [...state.comments,
-      {
-        ...newComment,
-        owner: {
-          email
-        }
-      }],
-    }))
-  }
+      setPlace(state => ({
+        ...state,
+        comments: [...state.comments,
+        {
+          ...newComment,
+          owner: {
+            email
+          }
+        }],
+      }))
+    } catch (error) {
+      console.log("There is a problem")
+    }
+  };
+
   const isOwner = place._ownerId === userId;
-  //console.log(userId);
-  //console.log(place._ownerId)
 
   const onDeleteClick = async () => {
     setShowDelete(true);
-  }
+  };
+
   const deletePlaceHandler = async () => {
+    try {
       await placeService.deletePlace(placeId);
-    navigate('/dashboard');
-  }
+      navigate('/dashboard');
+    }
+    catch (error) {
+      console.log('There is a problem');
+    }
+  };
 
   return (
     <>

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import * as styles from '../Place/Place.module.css'
+import * as styles from '../Place/Place.module.css';
 
 export default function Place({
     name,

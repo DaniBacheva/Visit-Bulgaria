@@ -5,7 +5,7 @@ export const useForm = (initialValues, onSubmitHandler) => {
 
 
     const changeHandler = (e) => {
-        setValues(state => ({ ...state, [e.target.name]: e.target.value }))
+        setValues(state => ({ ...state, [e.target.name]: e.target.value }));
     };
 
     const onSubmit = (e) => {
@@ -13,7 +13,7 @@ export const useForm = (initialValues, onSubmitHandler) => {
     
         onSubmitHandler(values);
 
-        setValues(initialValues); // extra
+        setValues(initialValues); // extra reset the form
     };
 
     const changeValues = (newValues) => {

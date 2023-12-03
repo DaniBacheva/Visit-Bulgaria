@@ -1,20 +1,20 @@
 import { createContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import * as authService from '../services/authService'
+import * as authService from '../services/authService';
 
-export const AuthContext = createContext(); // context
+export const AuthContext = createContext(); 
 
-export const AuthProvider = ({  //komponent
-    children,
+export const AuthProvider = ({  
+        children,
 }) => {
     const [auth, setAuth] = useLocalStorage('auth', {});
     const navigate = useNavigate();
     const [error, setError] = useState({});
 
     const onRegisterSubmit = async (values) => {
-        setError({})
+        setError({});
         const { rePassword, ...registerData } = values;
         if (rePassword !== registerData.password) {
             return;
@@ -35,7 +35,6 @@ export const AuthProvider = ({  //komponent
                 register: error.message,
             }))
         }
-
     };
 
     const onLoginSubmit = async (data) => {
@@ -71,7 +70,7 @@ export const AuthProvider = ({  //komponent
         token: auth.accessToken,
         email: auth.email,
         isAuthenticated: !!auth.accessToken
-    }
+    };
 
     return (
         <>
