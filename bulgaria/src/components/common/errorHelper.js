@@ -44,6 +44,9 @@ export default function formValidate(e) {
             return;
         }
     }
+    if (e.target.name === 'comment' && (value.length === 0)) {
+        errors.comment = 'Text is required';
+    }
 
     return errors;
 }

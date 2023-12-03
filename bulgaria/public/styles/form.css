@@ -110,3 +110,8 @@ margin-bottom: 0px;
   margin-top: 8rem;
   font-size: 30px;
 }
+button[type="submit"]:disabled {
+  background-color: rgba(16, 16, 16, 0.3); /* Background color when disabled */
+  color: rgba(255, 255, 255, 0.3); /* Text color when disabled */
+  /* Add other styles as needed */
+}

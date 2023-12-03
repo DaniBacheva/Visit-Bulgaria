@@ -77,8 +77,14 @@ hr {
 }
 
 .confirm {
-  width: 100%;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  display: inline-block;
+  margin: auto;
 }
+
 
 .modal h1 {
   margin-top: 10px;
@@ -110,7 +116,9 @@ p {
 .clearfix::after {
   content: "";
   clear: both;
-  display: table;
+   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Change styles for cancel button and delete button on extra small screens */

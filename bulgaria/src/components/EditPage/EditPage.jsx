@@ -4,27 +4,35 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useForm } from "../../hooks/useForm";
 import * as placeService from '../../services/placeService'
 import *as styles from '../EditPage/EditPage.module.css'
+import formValidate from '../common/errorHelper.js';
 
 export default function EditPage() {
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const { placeId } = useParams();
 
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState({});
 
-   useEffect(() => {
+  useEffect(() => {
     placeService.getOne(placeId)
       .then(result => {
         changeValues(result);
       });
 
-  }, [placeId])
+  }, [placeId]);
+
+  const validate = (e) => {
+    const errors = formValidate(e);
+    setErrors(errors)
+    console.log(Object.values(errors))
+  
+  }
 
   const onPlaceEditSubmit = async (data) => {
-    const result = await placeService.edit(data._id, data);
+    await placeService.edit(data._id, data);
     //console.log(data)
-      
+
     navigate(`/dashboard/${data._id}`);
-}
+  }
   const { values, changeHandler, onSubmit, changeValues } = useForm({
 
     _id: '',
@@ -38,77 +46,10 @@ const navigate = useNavigate();
 
   //console.log(values)
 
- 
-
-  const imageValidate = () => {
-    if (values.imageUrl.length < 6) {
-      setErrors(state => ({
-        ...state,
-        image: "Image should be at least 6 symbols",
-      }))
-    } else {
-      if (errors.image) {
-        setErrors(state => ({ ...state, image: '' }))
-      }
-    }
-  }
-
-  const nameValidate = () => {
-    if (values.name.length < 6) {
-      setErrors(state => ({
-        ...state,
-        name: "Name should be at least 6 symbols",
-      }))
-    } else {
-      if (errors.name) {
-        setErrors(state => ({ ...state, name: '' }))
-      }
-    }
-  }
-
-  const locationValidate = () => {
-    if (values.location.length < 10) {
-      setErrors(state => ({
-        ...state,
-        location: "Location should be at least 10 symbols",
-      }))
-    } else {
-      if (errors.location) {
-        setErrors(state => ({ ...state, location: '' }))
-      }
-    }
-  }
-
-  const descriptionValidate = () => {
-    if (values.description.length < 15) {
-      setErrors(state => ({
-        ...state,
-        description: "Description should be at least 15 symbols",
-      }))
-    } else {
-      if (errors.description) {
-        setErrors(state => ({ ...state, description: '' }))
-      }
-    }
-  }
-
-  const additionalInfoValidate = () => {
-    if (values.additionalInfo.length < 20) {
-      setErrors(state => ({
-        ...state,
-        additionalInfo: "Additional information should be at least 20 symbols",
-      }))
-    } else {
-      if (errors.location) {
-        setErrors(state => ({ ...state, location: '' }))
-      }
-    }
-  }
-
   return (
     <section id="edit">
       <div className="form">
-        <h2>Edit Fact</h2>
+        <h2>Edit Place</h2>
         <form className="edit-form" method="POST" onSubmit={onSubmit}>
           <input
             type="text"
@@ -117,7 +58,7 @@ const navigate = useNavigate();
             placeholder="Name"
             value={values.name}
             onChange={changeHandler}
-            onBlur={nameValidate}
+            onBlur={validate}
             className={errors.name && styles.inputError} />
           {errors.name && (
             <p className={styles.errorMessage}>{errors.name}</p>
@@ -130,7 +71,7 @@ const navigate = useNavigate();
             placeholder="Location"
             value={values.location}
             onChange={changeHandler}
-            onBlur={locationValidate}
+            onBlur={validate}
             className={errors.location && styles.inputError}
           />
           {errors.location && (
@@ -144,10 +85,10 @@ const navigate = useNavigate();
             placeholder="Image URL"
             value={values.imageUrl}
             onChange={changeHandler}
-            onBlur={imageValidate}
-            className={errors.image && styles.inputError} />
-          {errors.image && (
-            <p className={styles.errorMessage}>{errors.image}</p>
+            onBlur={validate}
+            className={errors.imageUrl && styles.inputError} />
+          {errors.imageUrl && (
+            <p className={styles.errorMessage}>{errors.imageUrl}</p>
           )}
 
           <textarea
@@ -158,13 +99,13 @@ const navigate = useNavigate();
             cols="50"
             value={values.description}
             onChange={changeHandler}
-            onBlur={descriptionValidate}
+            onBlur={validate}
             className={errors.description && styles.inputError}>
-            </textarea>
-            {errors.description && (
-              <p className={styles.errorMessage}>{errors.description}</p>
-            )}
-          
+          </textarea>
+          {errors.description && (
+            <p className={styles.errorMessage}>{errors.description}</p>
+          )}
+
           <textarea
             id="additional-info"
             name="additionalInfo"
@@ -173,13 +114,16 @@ const navigate = useNavigate();
             cols="50"
             value={values.additionalInfo}
             onChange={changeHandler}
-            onBlur={additionalInfoValidate}
+            onBlur={validate}
             className={errors.additionalInfo && styles.inputError}></textarea>
           {errors.additionalInfo && (
             <p className={styles.errorMessage}>{errors.additionalInfo}</p>
           )}
-       
-          <button type="submit">Post</button>
+
+          <button type="submit" disabled={Object.values(errors).length>0} >Post</button>
+          {Object.values(errors).length>0 && (
+            <p className={styles.errorMessage}>All fields are required</p>
+          )}
         </form>
       </div>
     </section>

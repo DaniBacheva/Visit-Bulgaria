@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import * as placeService from '../../services/placeService'
+import * as placeService from '../../services/placeService';
 
 import Place from "../Place/Place";
 
@@ -22,7 +22,6 @@ export default function Dashboard() {
             <h2>PLACES TO VISIT</h2>
             <section id="dashboard">
 
-
                 {places.map(p =>
                     <Place {...p} key={p._id} />)}
 
@@ -31,6 +30,5 @@ export default function Dashboard() {
 
             </section>
         </>
-
     )
 }

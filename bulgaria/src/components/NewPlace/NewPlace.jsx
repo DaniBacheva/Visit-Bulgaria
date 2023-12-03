@@ -1,36 +1,33 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import * as styles from '../NewPlace/NewPlace.module.css'
-import * as placeService from '../../services/placeService'
-import { useForm } from "../../hooks/useForm"
+import * as styles from '../NewPlace/NewPlace.module.css';
+import * as placeService from '../../services/placeService';
+import { useForm } from "../../hooks/useForm";
 import formValidate from '../common/errorHelper.js';
 
 export default function NewPlace() {
-  const [errors, setErrors] = useState({})
-  const [notValidate, setNotValidate] = useState(false)
+  const [errors, setErrors] = useState({});
+  //const [notValidate, setNotValidate] = useState(false);
   const navigate = useNavigate();
 
   const validate = (e) => {
     const errors = formValidate(e);
-    setErrors(errors)
-    console.log({ errors })
-
-    if (Object.values(errors).some(e => e)) {
-      setNotValidate(true)
-    }
+    setErrors(errors);
+    console.log(Object.values(errors));
   }
-
+  
   const onAddPlaceSubmit = async (data) => {
     try {
-      const newPlace = await placeService.create(data);
-      //console.log(newPlace)
+      await placeService.create(data);
 
       navigate('/dashboard')
     }
     catch (error) {
-
-      console.log(error)
+      setErrors(state => ({
+        ...state,
+        addPlace: error.message,
+      }));
     }
   }
   const { values, changeHandler, onSubmit } = useForm({
@@ -41,8 +38,6 @@ export default function NewPlace() {
     additionalInfo: '',
 
   }, onAddPlaceSubmit);
-
-
 
 
   return (
@@ -74,13 +69,13 @@ export default function NewPlace() {
           )}
 
           <input value={values.imageUrl}
+            id="imageUrl" placeholder="Image URL"
             onChange={changeHandler}
             onBlur={validate}
             type="text" name="imageUrl"
-            id="imageUrl" placeholder="Image URL"
-            className={errors.image && styles.inputError} />
-          {errors.image && (
-            <p className={styles.errorMessage}>{errors.image}</p>
+            className={errors.imageUrl && styles.inputError} />
+          {errors.imageUrl && (
+            <p className={styles.errorMessage}>{errors.imageUrl}</p>
           )}
 
           <textarea value={values.description}
@@ -104,11 +99,13 @@ export default function NewPlace() {
           {errors.additionalInfo && (
             <p className={styles.errorMessage}>{errors.additionalInfo}</p>
           )}
-          <button type="submit" disabled={notValidate} >Add Place</button>
+          <button type="submit" disabled={Object.values(errors).length>0} >Add Place</button>
+          {Object.values(errors).length>0 && (
+            <p className={styles.errorMessage}>All fields are required</p>
+          )}
         </form>
       </div>
     </section>
   )
 }
 
-//.some(x => x)
