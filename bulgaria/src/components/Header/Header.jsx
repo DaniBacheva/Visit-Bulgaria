@@ -22,7 +22,7 @@ export default function Header() {
         </div>
         {isAuthenticated && (
           <div className={styles.user}>
-            <Link to="/new-place">NEW PLACE</Link>
+            <Link to="/newPlace">NEW PLACE</Link>
             <Link to="/profile">PROFILE</Link>
             <Link to="/logout">LOGOUT</Link>
           </div>

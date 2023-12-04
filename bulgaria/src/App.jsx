@@ -8,7 +8,7 @@ import RouteGuard from './components/common/RouteGuard';
 import NewPlace from "./components/NewPlace/NewPlace";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Details from "./components/Details/Details";
-import EditPage from "./components/EditPage/EditPage";
+import PlaceEdit from './components/EditPage/PlaceEdit.jsx';
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
@@ -37,7 +37,7 @@ function App() {
 
                         <Route element={<RouteGuard />}>
                             <Route path={Path.NewPlace} element={<NewPlace />} />
-                            <Route path={Path.EditPlace} element={<EditPage />} />
+                            <Route path={Path.EditPlace} element={<PlaceEdit />} />
                             <Route path={Path.Profile} element={<Profile />} />
                         </Route>
                     </Routes>

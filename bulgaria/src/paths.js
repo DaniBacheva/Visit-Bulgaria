@@ -6,7 +6,7 @@ const Path = {
     Dashboard: '/dashboard',
     EditPlace: '/dashboard/:placeId/edit',
     DeletePlace: 'dashboard/:placeId/delete',
-    NewPlace: '/new-place',
+    NewPlace: '/newPlace',
     DetailsPlace: '/dashboard/:placeId',
     Profile:'/profile'
 }
