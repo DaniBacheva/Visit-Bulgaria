@@ -1,10 +1,29 @@
 .errorMessage {
-    color:red;
+    color: red;
     font-size: 0.8em;
     margin: 0 0 10px;
-    }
-    
-    .inputError {
-        border : 1px solid red;
-    
-    }
+}
+
+.inputError {
+    border: 1px solid red;
+
+}
+
+button[type=submit] {
+ 
+  margin: auto 50px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  height: 50px;
+  width: 200px;
+  color: white;
+  background: rgb(156, 244, 144);
+  text-shadow: 1px 1px black;
+  border-radius: 5px;
+  line-height: 0;
+  text-align: center;
+}
+
+label {
+    padding-bottom: 10%;
+}

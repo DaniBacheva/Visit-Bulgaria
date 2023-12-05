@@ -26,6 +26,10 @@ export default function Details() {
           ...placeData,
           comments,
         });
+      })
+      .catch((error) => {
+        console.error('One of the promises rejected:', error);
+        navigate('/404')
       });
   }, [placeId]);
 
@@ -45,7 +49,8 @@ export default function Details() {
         }],
       }))
     } catch (error) {
-      console.log("There is a problem")
+      console.log("There is a problem");
+      navigate('/404');
     }
   };
 
@@ -62,6 +67,7 @@ export default function Details() {
     }
     catch (error) {
       console.log('There is a problem');
+      navigate("/404");
     }
   };
 
@@ -83,7 +89,6 @@ export default function Details() {
           </div>
           <div id="info-wrapper">
             <div id="details-description">
-
               <p id="description">
                 {place.description}
               </p>
@@ -100,6 +105,7 @@ export default function Details() {
                 <button onClick={onDeleteClick} >Delete</button>
               </>
             )}
+            {(!isAuthenticated || !isOwner)&& <Link to={`/dashboard/`} >Back</Link>}
           </div>
         </div>
 
@@ -112,9 +118,8 @@ export default function Details() {
                   <p>{`${email} : ${comment}`}</p>
                 </li>
               ))}
-
               {!place.comments?.length && (
-                <p>No comments yet</p>)}
+                <p>No comments yet...</p>)}
             </ul>
             {isAuthenticated && <AddComment onCommentSubmit={onCommentSubmit} />}
           </div>

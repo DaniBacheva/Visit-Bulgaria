@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import * as styles from '../NewPlace/NewPlace.module.css';
 import * as placeService from '../../services/placeService';
 import { useForm } from "../../hooks/useForm";
-import formValidate from '../common/errorHelper.js';
+import formValidate from '../../util/errorHelper.js';
 
 export default function NewPlace() {
   const [errors, setErrors] = useState({});
@@ -15,7 +15,6 @@ export default function NewPlace() {
     setErrors(errors);
     console.log(Object.values(errors));
   }
-  
   const onAddPlaceSubmit = async (data) => {
     try {
       await placeService.create(data);
@@ -27,7 +26,8 @@ export default function NewPlace() {
         ...state,
         addPlace: error.message,
       }));
-      console.log( error.addPlace);
+      console.log(error.addPlace);
+      navigate('/404')
     }
   };
 
@@ -47,60 +47,54 @@ export default function NewPlace() {
 
         <form className={styles.createForm} onSubmit={onSubmit}>
 
-          <input value={values.name}
+          <input type="text" name="name" id="name" placeholder="Name"
             onChange={changeHandler}
             onBlur={validate}
-            type="text" name="name"
-            id="name" placeholder="Name"
+            value={values.name}
             className={errors.name && styles.inputError} />
           {errors.name && (
             <p className={styles.errorMessage}>{errors.name}</p>
           )}
 
-          <input value={values.location}
+          <input type="text" name="location" id="location" placeholder="Location"
             onChange={changeHandler}
             onBlur={validate}
-            type="text" name="location"
-            id="location" placeholder="Location"
+            value={values.location}
             className={errors.location && styles.inputError}
           />
           {errors.location && (
             <p className={styles.errorMessage}>{errors.location}</p>
           )}
 
-          <input value={values.imageUrl}
-            id="imageUrl" placeholder="Image URL"
+          <input type="text" name="imageUrl" id="imageUrl" placeholder="Image URL"
             onChange={changeHandler}
             onBlur={validate}
-            type="text" name="imageUrl"
+            value={values.imageUrl}
             className={errors.imageUrl && styles.inputError} />
           {errors.imageUrl && (
             <p className={styles.errorMessage}>{errors.imageUrl}</p>
           )}
 
-          <textarea value={values.description}
+          <textarea id="description" name="description" placeholder="Description" rows="5" cols="50"
             onChange={changeHandler}
             onBlur={validate}
-            id="description" name="description"
-            placeholder="Description" rows="5" cols="50"
+            value={values.description}
             className={errors.description && styles.inputError}>
           </textarea>
           {errors.description && (
             <p className={styles.errorMessage}>{errors.description}</p>
           )}
 
-
-          <textarea value={values.additionalInfo}
+          <textarea id="additional-info" name="additionalInfo" placeholder="AdditionalInfo" rows="8" cols="50"
             onChange={changeHandler}
             onBlur={validate}
-            id="additional-info" name="additionalInfo"
-            placeholder="AdditionalInfo" rows="8" cols="50"
+            value={values.additionalInfo}
             className={errors.additionalInfo && styles.inputError}></textarea>
           {errors.additionalInfo && (
             <p className={styles.errorMessage}>{errors.additionalInfo}</p>
           )}
-          <button type="submit" disabled={Object.values(errors).length>0} >Add Place</button>
-          {Object.values(errors).length>0 && (
+          <button type="submit" disabled={Object.values(errors).length > 0} >Add Place</button>
+          {Object.values(errors).length > 0 && (
             <p className={styles.errorMessage}>All fields are required</p>
           )}
         </form>

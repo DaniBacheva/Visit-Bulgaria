@@ -4,7 +4,7 @@ import { useContext, useState } from 'react';
 import AuthContext from "../../contexts/AuthContext";
 import { useForm } from "../../hooks/useForm";
 import * as styles from '../Login/Login.module.css';
-import formValidate from '../common/errorHelper.js';
+import formValidate from '../../util/errorHelper.js';
 
 
 export default function Login() {
@@ -27,9 +27,7 @@ export default function Login() {
         <form className={styles.form} method="POST" onSubmit={onSubmit}>
           <h2>Login</h2>
           <input
-            type="text"
-            name="email"
-            id="email" placeholder="email"
+            type="text"  name="email"  id="email"  placeholder="email"
             value={values.email}
             onChange={changeHandler}
             onBlur={validate}
@@ -39,10 +37,7 @@ export default function Login() {
           )}
 
           <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="password"
+            type="password" name="password" id="password"  placeholder="password"
             value={values.password}
             onChange={changeHandler}
             onBlur={validate}

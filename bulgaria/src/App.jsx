@@ -16,7 +16,7 @@ import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Logout from './components/Logout/Logout';
 import Profile from './components/Profile/Profile';
-
+import NotFound from './components/Home/NotFound.jsx';
 
 function App() {
 
@@ -40,6 +40,9 @@ function App() {
                             <Route path={Path.EditPlace} element={<PlaceEdit />} />
                             <Route path={Path.Profile} element={<Profile />} />
                         </Route>
+
+                        <Route path="*" element={<NotFound />} />
+                        <Route path="/404" element={<NotFound />} />
                     </Routes>
                 </main>
             </div>

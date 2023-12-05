@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext} from "react";
+import { useNavigate } from 'react-router-dom';
 
 import AuthContext from "../../contexts/AuthContext";
 import * as placeService from '../../services/placeService';
@@ -9,12 +10,14 @@ export default function Profile()  {
 
     const {userId} = useContext(AuthContext);
     const [places, setPlaces] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         placeService.getPlacesByOwner(userId)
             .then(result => setPlaces(result))
             .catch(error => {
-                console.log(error);
+                console.log(error)
+                navigate('/404');
             });
 
     }, []);

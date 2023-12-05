@@ -8,7 +8,6 @@ export default function Header() {
   const { isAuthenticated, email } = useContext(AuthContext);
   return (
     <header>
-
       <Link className={styles.logo} to="/"
       ><img className={styles.logoImg} src="../../../images/bg-logo.png" alt="bg-logo"
         /></Link>

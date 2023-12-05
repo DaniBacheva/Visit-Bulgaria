@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import  AuthContext  from "../../contexts/AuthContext";
 import { useForm } from "../../hooks/useForm";
 import * as styles from '../Register/register.module.css';
-import formValidate from '../common/errorHelper.js';
+import formValidate from '../../util/errorHelper.js';
 
 export default function Register() {
   const [errors, setErrors] = useState({});
@@ -22,8 +22,7 @@ export default function Register() {
     console.log(errors)
   };
 
-  
-  const rePasswordValidate = () => {
+    const rePasswordValidate = () => {
     if (values.rePassword.length == 0) {
       setErrors(state => ({
         ...state,

@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useForm } from "../../hooks/useForm";
 import * as placeService from '../../services/placeService'
 import *as styles from '../EditPage/EditPage.module.css'
-import formValidate from '../common/errorHelper.js';
+import formValidate from '../../util/errorHelper.js';
 
 export default function EditPage() {
   const navigate = useNavigate();

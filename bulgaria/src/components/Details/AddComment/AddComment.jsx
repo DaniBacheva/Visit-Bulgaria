@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 import { useForm } from "../../../hooks/useForm";
-import *as styles from "../AddComment/AddComment.module.css";
-import formValidate from '../../common/errorHelper.js';
+import * as styles from "../AddComment/AddComment.module.css";
+import formValidate from '../../../util/errorHelper.js';
 
 export default function AddComment({
     onCommentSubmit,
@@ -31,7 +31,7 @@ export default function AddComment({
                     {error.comment && (
                         <p className={styles.errorMessage}>{error.comment}</p>
                     )}
-                    <input className="btn submit" disabled={Object.values(error).length !== 0} type="submit" value="Add Comment" />
+                    <button type="submit" disabled={Object.values(error).length !== 0}>Add Comment</button>
                 </form>
             </article>
         </>

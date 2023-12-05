@@ -14,14 +14,13 @@ export const AuthProvider = ({
     const [error, setError] = useState({});
 
     const onRegisterSubmit = async (values) => {
-        setError({});
+      setError({});
         const { rePassword, ...registerData } = values;
         if (rePassword !== registerData.password) {
             return;
         }
         try {
             const result = await authService.register(values.email, values.password);
-
             setAuth(result);
 
             localStorage.setItem('accessToken', result.accessToken);
@@ -38,7 +37,7 @@ export const AuthProvider = ({
     };
 
     const onLoginSubmit = async (data) => {
-        setError({})
+     setError({})
         try {
             const result = await authService.login(data.email, data.password);
             setAuth(result);

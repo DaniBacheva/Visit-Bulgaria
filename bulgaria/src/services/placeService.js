@@ -16,14 +16,9 @@ export const create = async (placeData) => {
 };
 
 export const getOne = async (placeId) => {
-   try {
-      const result = await request.get(`${baseUrl}/${placeId}`);
+       const result = await request.get(`${baseUrl}/${placeId}`);
 
       return result;
-   } catch (error) {
-      console.log(error);
-   }
-
 };
 
 export const edit = (placeId, data) => request.put(`${baseUrl}/${placeId}`, data);

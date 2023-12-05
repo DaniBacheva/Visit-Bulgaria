@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import * as placeService from '../../services/placeService';
 
@@ -6,12 +7,15 @@ import Place from "../Place/Place";
 
 export default function Dashboard() {
     const [places, setPlaces] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         placeService.getAll()
             .then(result => setPlaces(result))
             .catch(error => {
                 console.log(error);
+                navigate('/404');
+
             });
     }, []);
 
