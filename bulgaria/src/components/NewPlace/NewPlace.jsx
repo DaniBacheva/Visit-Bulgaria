@@ -5,6 +5,7 @@ import * as styles from '../NewPlace/NewPlace.module.css';
 import * as placeService from '../../services/placeService';
 import { useForm } from "../../hooks/useForm";
 import formValidate from '../../util/errorHelper.js';
+import Path from '../../paths.js';
 
 export default function NewPlace() {
   const [errors, setErrors] = useState({});
@@ -19,7 +20,7 @@ export default function NewPlace() {
     try {
       await placeService.create(data);
 
-      navigate('/dashboard');
+      navigate(Path.Dashboard);
     }
     catch (error) {
       setErrors(state => ({
@@ -27,7 +28,7 @@ export default function NewPlace() {
         addPlace: error.message,
       }));
       console.log(error.addPlace);
-      navigate('/404')
+      navigate(Path.NotFound)
     }
   };
 

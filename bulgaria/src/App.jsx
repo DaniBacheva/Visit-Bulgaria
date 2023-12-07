@@ -38,8 +38,8 @@ function App() {
                             <Route path={Path.Profile} element={<Profile />} />
                         </Route>
 
+                        <Route path={Path.NotFound} element={<NotFound />} />
                         <Route path="*" element={<NotFound />} />
-                        <Route path="/404" element={<NotFound />} />
                     </Routes>
                 </main>
             </div>

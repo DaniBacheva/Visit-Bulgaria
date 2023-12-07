@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import * as placeService from '../../services/placeService';
+import Path from "../../paths";
 
 import Place from "../Place/Place";
 
@@ -14,7 +15,7 @@ export default function Dashboard() {
             .then(result => setPlaces(result))
             .catch(error => {
                 console.log(error);
-                navigate('/404');
+                navigate(Path.NotFound);
 
             });
     }, []);

@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import * as placeService from '../../services/placeService.js'
 import *as styles from '../EditPage/EditPage.module.css'
 import formValidate from '../../util/errorHelper.js';
+import Path from '../../paths.js';
 
 export default function EditPage() {
     const navigate = useNavigate();
@@ -25,7 +26,7 @@ export default function EditPage() {
             })
             .catch(error => {
                 console.log(error)
-                navigate('/404');
+                navigate(Path.NotFound);
             });
 
     }, [placeId]);
@@ -42,11 +43,11 @@ export default function EditPage() {
 
         try {
             await placeService.edit(placeId, values);
-            navigate('/dashboard/');
+            navigate(Path.Dashboard);
         }
         catch (error) {
             console.log('There is a problem');
-            navigate('/404');
+            navigate(Path.NotFound);
         }
     };
 

@@ -8,6 +8,7 @@ const Path = {
     DeletePlace: 'dashboard/:placeId/delete',
     NewPlace: '/newPlace',
     DetailsPlace: '/dashboard/:placeId',
-    Profile:'/profile'
+    Profile:'/profile',
+    NotFound:'/404'
 }
 export default Path;

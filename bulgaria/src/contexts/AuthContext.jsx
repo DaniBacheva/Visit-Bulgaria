@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import * as authService from '../services/authService';
+import Path from '../paths.js';
 
 export const AuthContext = createContext(); 
 
@@ -25,7 +26,7 @@ export const AuthProvider = ({
 
             localStorage.setItem('accessToken', result.accessToken);
 
-            navigate('/');
+            navigate(Path.Dashboard);
         }
         catch (error) {
             console.log(error.message);
@@ -44,7 +45,7 @@ export const AuthProvider = ({
 
             localStorage.setItem('accessToken', result.accessToken);
 
-            navigate('/');
+            navigate(Path.Dashboard);
         }
         catch (error) {
             console.log(error.message)

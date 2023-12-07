@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import AuthContext from "../../contexts/AuthContext";
 import * as placeService from '../../services/placeService';
+import Path from '../../paths.js';
 
 import Place from "../Place/Place";
 
@@ -17,7 +18,7 @@ export default function Profile()  {
             .then(result => setPlaces(result))
             .catch(error => {
                 console.log(error)
-                navigate('/404');
+                navigate(Path.NotFound);
             });
 
     }, []);

@@ -1,6 +1,6 @@
 import * as styles from '../Home/Home.module.css'
 
-export default function Home() {
+export default function NotFound() {
     return (
         <>
             <section className={styles.home}>

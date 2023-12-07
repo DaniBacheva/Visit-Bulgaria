@@ -4,7 +4,8 @@ import { useNavigate, Link, useParams } from 'react-router-dom'
 import AuthContext from "../../contexts/AuthContext";
 import * as commentService from '../../services/commentService';
 import * as placeService from '../../services/placeService';
-import * as styles from '../Details/Details.module.css'
+import * as styles from '../Details/Details.module.css';
+import Path from '../../paths.js';
 
 import AddComment from './AddComment/AddComment';
 import DeletePlace from './DeletePlace/DeletePlace';
@@ -29,7 +30,7 @@ export default function Details() {
       })
       .catch((error) => {
         console.error('One of the promises rejected:', error);
-        navigate('/404')
+        navigate(Path.NotFound)
       });
   }, [placeId]);
 
@@ -49,8 +50,8 @@ export default function Details() {
         }],
       }))
     } catch (error) {
-      console.log("There is a problem");
-      navigate('/404');
+      console.log(error);
+      navigate(Path.NotFound);
     }
   };
 
@@ -63,11 +64,11 @@ export default function Details() {
   const deletePlaceHandler = async () => {
     try {
       await placeService.deletePlace(placeId);
-      navigate('/dashboard');
+      navigate(Path.Dashboard);
     }
     catch (error) {
-      console.log('There is a problem');
-      navigate("/404");
+      console.log(error);
+      navigate(Path.NotFound);
     }
   };
 
