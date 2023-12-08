@@ -13,7 +13,7 @@ const { onLogout} = useContext(AuthContext);
         authService.logout()
         .then (()=> {
            onLogout();
-           navigate(Path.NotFound)
+           navigate(Path.Dashboard)
         })
         .catch(()=> navigate(Path.NotFound));
         

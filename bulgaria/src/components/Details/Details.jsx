@@ -86,16 +86,12 @@ export default function Details() {
           <div className={styles.basic}>
             <h4 id="details-name">{place.name}</h4>
             <img id="details-img" src={place.imageUrl} />
-            <p id="location">Location: {`${place.location}`}</p>
+            <p id="location">Location: {place.location}</p>
           </div>
           <div id="info-wrapper">
             <div id="details-description">
-              <p id="description">
-                {place.description}
-              </p>
-              <p id="more-info">
-                {place.additionalInfo}
-              </p>
+              <p id="description"> {place.description}</p>
+              <p id="more-info">{place.additionalInfo}</p>
             </div>
           </div>
 
@@ -106,7 +102,7 @@ export default function Details() {
                 <button onClick={onDeleteClick} >Delete</button>
               </>
             )}
-            {(!isAuthenticated || !isOwner)&& <Link to={`/dashboard/`} >Back</Link>}
+            {(!isAuthenticated || !isOwner) && <Link to={`/dashboard/`} >Back</Link>}
           </div>
         </div>
 
