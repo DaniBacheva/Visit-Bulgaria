@@ -57,10 +57,6 @@ export default function Details() {
 
   const isOwner = place._ownerId === userId;
 
-  const onDeleteClick = async () => {
-    setShowDelete(true);
-  };
-
   const deletePlaceHandler = async () => {
     try {
       await placeService.deletePlace(placeId);
@@ -75,10 +71,9 @@ export default function Details() {
   return (
     <>
       {showDelete && (
-        <DeletePlace
+        <DeletePlace values={place}
           onClose={() => setShowDelete(false)}
           onDelete={deletePlaceHandler}
-          values={place}
         />
       )}
       <section id="details">
@@ -99,7 +94,7 @@ export default function Details() {
             {isOwner && (
               <>
                 <Link to={`/dashboard/${place._id}/edit`} >Edit</Link>
-                <button onClick={onDeleteClick} >Delete</button>
+                <button onClick={() => setShowDelete(true)} >Delete</button>
               </>
             )}
             {(!isAuthenticated || !isOwner) && <Link to={`/dashboard/`} >Back</Link>}

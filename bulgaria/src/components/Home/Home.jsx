@@ -4,7 +4,7 @@ export default function Home() {
     return (
         <>
             <section className={styles.home}>
-                <img src="https://camping.bg/f/logo/1/620_a0ce9c94ff8172c8b887d834ff64c9b8.jpg" width="500" height="300" />
+                <img src="../../../images/logo.jpg" width="500" height="auto" />
                 <h1>WELCOME TO BULGARIA </h1>
                 <h3>
                     Why visit Bulgaria – here are some reasons to travel to Bulgaria.
